@@ -21,4 +21,9 @@ public class AsUserServiceImpl implements AsUserService {
 		return asUserMapper.findAsUser(user);
 	}
 
+	@Override
+	public boolean updateAsUser(AsUser user) {
+		return asUserMapper.updateAsUser(user)>0;
+	}
+
 }

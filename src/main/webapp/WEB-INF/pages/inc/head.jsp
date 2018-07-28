@@ -45,7 +45,7 @@
 			<li class="headfunc">
 				<ul>
 					<li>欢迎您 ：${loginUser.userName} <a
-						id="modifypwdbtna">修改密码</a> <a href="/exit.action">退出</a>
+						id="modifypwdbtna">修改密码</a> <a href="${pageContext.request.contextPath}/logOut">退出</a>
 						</li>
 				</ul>
 			</li>

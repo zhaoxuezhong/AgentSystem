@@ -9,5 +9,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INNER JOIN as_role ar ON au.roleId=ar.id
 		where userCode='admin' and userPassword='123456' and au.isStart=1;
 	</select>
+	
+	<update id="updateAsUser" parameterType="AsUser">
+		UPDATE `as_user` 
+		<trim prefix="set" suffixOverrides="," suffix="WHERE `id` = #{id}">
+			<if test="userCode != null ">`userCode` = #{userCode}, </if>
+			<if test="userName != null ">`userName` = #{userName}, </if>
+			<if test="userPassword != null ">`userPassword` = #{userPassword}, </if>
+			<if test="lastLoginTime != null ">`lastLoginTime` = #{lastLoginTime}, </if>
+			<if test="lastUpdateTime != null ">`lastUpdateTime` = #{lastUpdateTime}, </if>
+			<if test="isStart != null ">`isStart` = #{isStart}, </if>
+			<if test="roleId != null ">`roleId` = #{roleId}</if>
+		</trim>
+	</update>
 
 </mapper>

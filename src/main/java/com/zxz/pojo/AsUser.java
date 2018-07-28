@@ -30,6 +30,12 @@ public class AsUser implements java.io.Serializable {
 	public AsUser() {
 	}
 
+	public AsUser(Long id, Timestamp lastLoginTime) {
+		super();
+		this.id = id;
+		this.lastLoginTime = lastLoginTime;
+	}
+
 	/** minimal constructor */
 	public AsUser(String userCode, String userName, String userPassword, Timestamp creationTime, String createdBy,
 			Long roleId) {

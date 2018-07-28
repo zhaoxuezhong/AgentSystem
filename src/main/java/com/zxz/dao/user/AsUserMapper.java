@@ -9,6 +9,7 @@ import com.zxz.pojo.AsUser;
 public interface AsUserMapper {
 	
 	AsUser findAsUser(AsUser user);
-	
+
+	int updateAsUser(AsUser user);
 	
 }

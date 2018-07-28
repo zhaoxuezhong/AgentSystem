@@ -9,6 +9,7 @@ import com.zxz.pojo.AsUser;
 public interface AsUserService {
 
 	AsUser login(AsUser user);
-	
+
+	boolean updateAsUser(AsUser user);
 	
 }

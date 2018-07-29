@@ -9,8 +9,8 @@ public class AsContacts implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = -2777043909047023379L;
-	private Long id;
-	private Long customId;
+	private Integer id;
+	private Integer customId;
 	private String contactName;
 	private String contactTel;
 	private String contactFax;
@@ -24,12 +24,12 @@ public class AsContacts implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AsContacts(Long customId) {
+	public AsContacts(Integer customId) {
 		this.customId = customId;
 	}
 
 	/** full constructor */
-	public AsContacts(Long customId, String contactName, String contactTel, String contactFax, String contactEmail,
+	public AsContacts(Integer customId, String contactName, String contactTel, String contactFax, String contactEmail,
 			String contactRole) {
 		this.customId = customId;
 		this.contactName = contactName;
@@ -41,19 +41,19 @@ public class AsContacts implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getCustomId() {
+	public Integer getCustomId() {
 		return this.customId;
 	}
 
-	public void setCustomId(Long customId) {
+	public void setCustomId(Integer customId) {
 		this.customId = customId;
 	}
 

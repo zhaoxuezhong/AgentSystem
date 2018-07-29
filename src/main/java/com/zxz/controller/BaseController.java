@@ -30,14 +30,12 @@ public class BaseController {
 
 
 	public AsUser getCurrentUser() {
-		if(null == this.currentUser){
-			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-			HttpSession session = request.getSession(false);
-			if(null != session){
-				currentUser = (AsUser)session.getAttribute(Constants.SESSION_USER);
-			}else {
-				currentUser = null;
-			}
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpSession session = request.getSession(false);
+		if(null != session){
+			currentUser = (AsUser)session.getAttribute(Constants.SESSION_USER);
+		}else {
+			currentUser = null;
 		}
 		return currentUser;
 	}
@@ -53,6 +51,6 @@ public class BaseController {
 	}
 	
 	protected String pages(String name){
-		return "WEB-INF/pages"+name;
+		return "WEB-INF/pages/"+name;
 	}
 }

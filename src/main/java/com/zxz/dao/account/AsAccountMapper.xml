@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxz.dao.account.AsAccountMapper">
+
+	<select id="findAsAccountByUserId" resultType="AsAccount" parameterType="AsAccount">
+		select *from as_account where userId=#{userId}
+	</select>
+	
+	<update id="updateAsAccount" parameterType="AsAccount">
+		UPDATE `as_account`
+		<trim prefix="set" suffixOverrides="," suffix="WHERE `id` = #{id}">
+			<if test="money != null ">`money` = #{money}, </if>
+			<if test="moneyBak != null ">`moneyBak` = #{moneyBak}, </if>
+		</trim>
+	</update>
+
+</mapper>

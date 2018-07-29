@@ -11,8 +11,8 @@ public class AsLogs implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = -8188798054642387742L;
-	private Long id;
-	private Long userId;
+	private Integer id;
+	private Integer userId;
 	private String userName;
 	private String operateInfo;
 	private Timestamp operateDatetime;
@@ -24,7 +24,7 @@ public class AsLogs implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AsLogs(Long userId, String userName, String operateInfo, Timestamp operateDatetime) {
+	public AsLogs(Integer userId, String userName, String operateInfo, Timestamp operateDatetime) {
 		this.userId = userId;
 		this.userName = userName;
 		this.operateInfo = operateInfo;
@@ -33,19 +33,19 @@ public class AsLogs implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getUserId() {
+	public Integer getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

@@ -11,7 +11,7 @@ public class AsFunction implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = 6144480946688534416L;
-	private Long id;
+	private Integer id;
 	private String functionCode;
 	private String functionName;
 	private Timestamp creationTime;
@@ -50,11 +50,11 @@ public class AsFunction implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

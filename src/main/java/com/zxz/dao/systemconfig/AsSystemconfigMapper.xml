@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxz.dao.systemconfig.AsSystemconfigMapper">
+
+	<select id="findAsSystemconfigList" resultType="AsSystemconfig">
+		select * from as_systemconfig where configType=#{configType} and isStart=#{isStart};
+	</select>
+	
+	<select id="getMaxConfigTypeValue" resultType="int" parameterType="int">
+		select MAX(configTypeValue) from as_systemconfig where configType=#{configType}
+	</select>
+	
+	<select id="getConfigTypeNameExist" resultType="int" parameterType="string">
+		select count(1) from as_systemconfig where configTypeName=#{configTypeName}
+	</select>
+	
+	<insert id="addAsSystemconfig" parameterType="AsSystemconfig">
+		INSERT INTO `as_systemconfig`
+		(`configType`, `configTypeName`, `configTypeValue`, `configValue`, `isStart`)
+		VALUES (#{configType},#{configTypeName},#{configTypeValue},#{configValue},#{isStart});
+	</insert>
+	
+	<update id="updateAsSystemconfig" parameterType="AsSystemconfig">
+		UPDATE `as_systemconfig` 
+		<trim prefix="set" suffixOverrides="," suffix="WHERE `id` = #{id}">
+			<if test="configType != null">`configType` = #{configType},</if>
+			<if test="configTypeName != null">`configTypeName` = #{configTypeName},</if>
+			<if test="configTypeValue != null">`configTypeValue` = #{configTypeValue},</if>
+			<if test="configValue != null">`configValue` = #{configValue},</if>
+			<if test="isStart != null">`isStart` = #{isStart}</if>
+		</trim>
+	</update>
+	
+	<delete id="deleteAsSystemconfig" parameterType="int">
+		delete from `as_systemconfig` where id=#{id}
+	</delete>	
+
+</mapper>

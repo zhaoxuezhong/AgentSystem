@@ -11,11 +11,11 @@ public class AsKeywords implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = 8150510879056144053L;
-	private Long id;
+	private Integer id;
 	private String keywords;
-	private Long agentId;
+	private Integer agentId;
 	private String agentName;
-	private Long customId;
+	private Integer customId;
 	private String customName;
 	private Double preRegFrozenMoney;
 	private Double price;
@@ -44,7 +44,7 @@ public class AsKeywords implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AsKeywords(String keywords, Long agentId, String agentName, Long customId, String customName,
+	public AsKeywords(String keywords, Integer agentId, String agentName, Integer customId, String customName,
 			Double preRegFrozenMoney, Double price) {
 		this.keywords = keywords;
 		this.agentId = agentId;
@@ -56,7 +56,7 @@ public class AsKeywords implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AsKeywords(String keywords, Long agentId, String agentName, Long customId, String customName,
+	public AsKeywords(String keywords, Integer agentId, String agentName, Integer customId, String customName,
 			Double preRegFrozenMoney, Double price, Integer productType, Integer serviceYears, Integer openApp,
 			String appUserName, String appPassword, String loginUrl, String iosDownloadUrl, String androidDownloadUrl,
 			String codeIosUrl, String codeAndroidUrl, Timestamp preRegDatetime, Timestamp preRegPassDatetime,
@@ -89,11 +89,11 @@ public class AsKeywords implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -105,11 +105,11 @@ public class AsKeywords implements java.io.Serializable {
 		this.keywords = keywords;
 	}
 
-	public Long getAgentId() {
+	public Integer getAgentId() {
 		return this.agentId;
 	}
 
-	public void setAgentId(Long agentId) {
+	public void setAgentId(Integer agentId) {
 		this.agentId = agentId;
 	}
 
@@ -121,11 +121,11 @@ public class AsKeywords implements java.io.Serializable {
 		this.agentName = agentName;
 	}
 
-	public Long getCustomId() {
+	public Integer getCustomId() {
 		return this.customId;
 	}
 
-	public void setCustomId(Long customId) {
+	public void setCustomId(Integer customId) {
 		this.customId = customId;
 	}
 

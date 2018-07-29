@@ -22,10 +22,10 @@ public class SysInterceptor implements HandlerInterceptor {
 		// intercept
 		HttpSession session = request.getSession();
 		AsUser user = ((AsUser) session.getAttribute(Constants.SESSION_USER));
-		if (null == user) {
+		if (null != user) {
 			return true;
 		} else {
-			response.sendRedirect(request.getContextPath() + "/401.html");
+			response.sendRedirect(request.getContextPath() + "/error/403.jsp");
 			return false;
 		}
 	}

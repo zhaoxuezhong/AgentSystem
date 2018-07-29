@@ -9,7 +9,7 @@ public class AsSystemconfig implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = 2336688273033134161L;
-	private Long id;
+	private Integer id;
 	private Integer configType;
 	private String configTypeName;
 	private Integer configTypeValue;
@@ -42,11 +42,11 @@ public class AsSystemconfig implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

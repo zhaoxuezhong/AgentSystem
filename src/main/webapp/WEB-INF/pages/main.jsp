@@ -16,13 +16,15 @@
 			<li>
 			<!-- 显示Account对象的属性 -->
 				您当前账户 余额:
-				<s:if test="account==null">
-					对不起,您没有开户
-				</s:if>
-				<s:else>
-					<s:property value="account.money"/>
-				</s:else>
-				<a href="/accountdetail.action">查看账户明细</a>
+				<c:choose>
+					<c:when test="${empty account}">
+						对不起,您没有开户
+					</c:when>
+					<c:otherwise>
+						${account.money}
+					</c:otherwise>
+				</c:choose>
+				<a href="${pageContext.request.contextPath}/agent/account/accountdetail">查看账户明细</a>
 			</li>
 		</ul>
 	

@@ -19,10 +19,9 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
+<script type="text/javascript">
+	var path="<%=basePath%>";
+</script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/public.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/main.css">
 <!-- ymPrompt弹出框 -->
@@ -59,6 +58,11 @@
 				<li class="m_line"><img src="/imgs/line1.gif"></li>
 				<li id="m_<s:property value="#sta.index+1"/>" class="m_li"  onmouseover="mover(<s:property value="#sta.index+1"/>)"><a href="<s:property value="mainFunction.funcUrl"/>"><s:property value="mainFunction.functionName"/></a></li>
 			</s:iterator> --%>
+			<c:forEach items="${menuList}" var="menu" varStatus="i">
+				<li class="m_line"><img src="${pageContext.request.contextPath}/statics/imgs/line1.gif"></li>
+				<li id="m_${i.index+1}" class="m_li"  onmouseover="mover(${i.index+1})">
+					<a href="${menu.asFunction.funcUrl}">${menu.asFunction.functionName}</a></li>
+			</c:forEach>
 		</ul>
 	</div>
 	
@@ -75,14 +79,20 @@
 	<!-- 子菜单 -->
 	<div class="subbox">
 		<ul class="smenu">
-		<%-- 	<s:iterator value="roleFunctions" status="sta">
+ 		<%-- 	<s:iterator value="roleFunctions" status="sta">
 				<li id="s_<s:property value="#sta.index+1"/>" class="s_li">
 					<s:iterator value="subFunctions">
 						<a href="<s:property value="funcUrl"/>"><s:property value="functionName"/></a>
 					</s:iterator>
 				</li>
 			</s:iterator> --%>
-		
+		<c:forEach items="${menuList}" var="menu" varStatus="i">
+			<li id="s_${i.index+1}" class="s_li">
+			<c:forEach items="${menu.smenuFunction}" var="smenu">
+				<a href="${smenu.funcUrl}">${smenu.functionName}</a>
+			</c:forEach>
+				</li>
+		</c:forEach>
 			<!-- <li id="s_1" class="s_li">	
 				
 				 

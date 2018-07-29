@@ -4,27 +4,27 @@
 <div class="mbxnav">
 	<!-- 导航 -->
 	系统配置管理\
-	<s:if test="configType==1">
-		<a href="/caiwutype.action">财务类型</a>
-	</s:if>
-	<s:if test="configType==2">
-		<a href="/servicetype.action"> 服务类型</a>
-	</s:if>
-	<s:if test="configType==3">
-		<a href="/serviceyears.action">服务年限</a>
-	</s:if>
-	<s:if test="configType==4">
-		<a href="/appurl.action">APP地址</a>
-	</s:if>
-	<s:if test="configType==5">
-		<a href="/customtype.action"> 客户类型</a>
-	</s:if>
-	<s:if test="configType==6">
-		<a href="/cardtype.action">证件类型</a>
-	</s:if>
-	<s:if test="configType==7">
-		<a href="/youhuitype.action">优惠类型</a>
-	</s:if>
+	<c:if test="${configType==1}">
+		<a href="agent/systemconfig/list/1">财务类型</a>
+	</c:if>
+	<c:if test="${configType==2}">
+		<a href="agent/systemconfig/list/2">服务类型</a>
+	</c:if>
+	<c:if test="${configType==3}">
+		<a href="agent/systemconfig/list/3">服务年限</a>
+	</c:if>
+	<c:if test="${configType==4}">
+		<a href="agent/systemconfig/list/4">APP地址</a>
+	</c:if>
+	<c:if test="${configType==5}">
+		<a href="agent/systemconfig/list/5">客户类型</a>
+	</c:if>
+	<c:if test="${configType==6}">
+		<a href="agent/systemconfig/list/6">证件类型</a>
+	</c:if>
+	<c:if test="${configType==7}">
+		<a href="agent/systemconfig/list/7">优惠类型</a>
+	</c:if>
 </div>
 <div class="container">
 
@@ -32,16 +32,15 @@
 	<div class="modifySystemdiv addback" id="addSystemdiv">
 		<ul>
 			<li class="lititle">你正在进行添加操作<input type="hidden"
-				id="addConfigType" value="<s:property value="configType"/>">
+				id="addConfigType" value="${configType}">
 			</li>
-
 
 			<li>类型名称：<input type="text" id="addConfigName"></li>
 
-			<s:if test="configType==7||configType==2">
+			<c:if test="${configType==7||configType==2 }">
 				<li>配置项值:<input type="text" id="addConfigValue">
 				</li>
-			</s:if>
+			</c:if>
 
 			<li>是否启用:<select id="addIsStartSelect">
 					<option value="1" selected="selected">启用</option>
@@ -55,14 +54,14 @@
 		<ul>
 			<li class="lititle">你正在修改操作 <input type="hidden" id="sid" /> <!-- 配置项的主键ID -->
 				<input type="hidden" id="modifyConfigType"
-				value="<s:property value="configType"/>">
+				value="${configType}">
 			</li>
 
 			<li>类型名称：<input type="text" id="modifyConfigName"></li>
-			<s:if test="configType==7||configType==2">
+			<c:if test="${configType==7||configType==2 }">
 				<li>配置项值:<input type="text" id="modifyConfigValue">
 				</li>
-			</s:if>
+			</c:if>
 			<li>是否启用:<select id="modifyIsStartSelect">
 					<option value="1" selected="selected">启用</option>
 					<option value="0">停用</option>
@@ -70,88 +69,85 @@
 				<input type="button" id="cancleModifySystemConfigBtn" value="取消">
 		</ul>
 	</div>
-	<s:if test="configType==1||configType==2||configType==5||configType==6||configType==7">
-		<!-- 列表 -->
-		<div>
-			<!-- 添加按钮 -->
-			<div class="addSystemConfig">
-				<input type="button" id="addsystemconfig"
-					value="添加<s:property value="configTypeName"/>" />
-			</div>
+	<c:choose>
+		<c:when
+			test="${configType==1||configType==2||configType==5||configType==6||configType==7}">
 			<!-- 列表 -->
-			<table>
-				<thead>
-					<tr>
-						<th>序号</th>
-						<th>配置类型</th>
-						<s:if test="configType==2||configType==7">
-							<th>配置数值</th>
-						</s:if>
-						<th>是否启用</th>
-
-						<th>操作</th>
-				</thead>
-				<tbody>
-					<s:iterator value="systemConfigList" status="st">
+			<div>
+				<!-- 添加按钮 -->
+				<div class="addSystemConfig">
+					<input type="button" id="addsystemconfig" value="添加" />
+				</div>
+				<!-- 列表 -->
+				<table>
+					<thead>
 						<tr>
-							<td><s:property value="#st.index+1" /></td>
-							<td><s:property value="configTypeName" /></td>
-							<s:if test="configType==2||configType==7">
-								<td><s:property value="configValue" />
-								</td>
-							</s:if>
-							<td><s:if test="isStart==1">启用</s:if> <s:else>停用</s:else></td>
-							<td><span class="modifySystemBtn"
-								sid="<s:property value="id"/>"
-								configtype="<s:property value="configType"/>"
-								sname="<s:property value="configTypeName"/>"
-								svalue="<s:property value="configValue"/>"
-								isstart="<s:property value="isStart"/>"> 修改</span> <span
-								class="deleteSystemBtn" sid="<s:property value="id"/>"
-								sname="<s:property value="configTypeName"/>"> 删除</span>
-							</td>
-						</tr>
-					</s:iterator>
-				</tbody>
+							<th>序号</th>
+							<th>配置类型</th>
+							<c:if test="${configType==2||configType==7 }">
+								<th>配置数值</th>
+							</c:if>
+							<th>是否启用</th>
 
-			</table>
-
-		</div>
-	</s:if>
-	<s:else>
-		<!-- simple div configType:3|4-->
-		<div class="simpleconfig">
-			<h3>
-			<s:if test="configType==3">
+							<th>操作</th>
+					</thead>
+					<tbody>
+						<c:forEach items="${systemConfigList}" var="config" varStatus="st">
+							<tr>
+								<td>${st.index+1}</td>
+								<td>${config.configTypeName}</td>
+								<c:if test="${config.configType==2 || config.configType==7}">
+									<td>${config.configValue}</td>
+								</c:if>
+								<td><c:if test="${config.isStart==1}">启用</c:if> <c:if
+										test="${config.isStart==0}">停用</c:if></td>
+								<td><span class="modifySystemBtn" sid="${config.id}"
+									configtype="${config.configType}"
+									sname="${config.configTypeName}" svalue="${config.configValue}"
+									isstart="${config.isStart}"> 修改</span> <span
+									class="deleteSystemBtn" sid="${config.id}"
+									sname="${config.configTypeName}"> 删除</span></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<!-- simple div configType:3|4-->
+			<div class="simpleconfig">
+				<h3>
+					<c:if test="${configType==3 }">
 				服务年限管理-填写最大的服务年限
-			</s:if>
-			<s:else>
+			</c:if>
+					<c:if test="${configType==4 }">
 				APP URL管理-填写制作APP的系统的URL地址
-			</s:else>
-			</h3>
-			<input type="hidden" id="configType"
-				value="<s:property value="configType"/>"> 	<!-- 服务年限 configType=3 -->
-		
-			<input type="hidden" id="simpleConfigId"
-				value="<s:property value="systemConfig.id"/>">
-			<ul>
-				<li>配置名称：<input type="text" id="simpleTypeName"
-					value="<s:property value="systemConfig.configTypeName"/>">
-				</li>
-				<li>配置数值：<input type="text" id="simpleConfigValue"
-					value="<s:property value="systemConfig.configValue"/>">
-				</li>
+			</c:if>
+				</h3>
+				<input type="hidden" id="configType"
+					value="${configType}">
+				<!-- 服务年限 configType=3 -->
 
-				<li><input type="button" id="simpleBtn" value="保存">
-				</li>
-			</ul>
+				<input type="hidden" id="simpleConfigId"
+					value="${systemConfigList[0].id}">
+				<ul>
+					<li>配置名称：<input type="text" id="simpleTypeName"
+						value="${systemConfigList[0].configTypeName}">
+					</li>
+					<li>配置数值：<input type="text" id="simpleConfigValue"
+						value="${systemConfigList[0].configValue}">
+					</li>
 
-		</div>
-	</s:else>
+					<li><input type="button" id="simpleBtn" value="保存"></li>
+				</ul>
+			</div>
+		</c:otherwise>
+	</c:choose>
 </div>
 <jsp:include page="inc/foot.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/systemconfig.css">
-<script type="text/javascript" src="/js/systemconfig.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/statics/css/systemconfig.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/statics/js/systemconfig.js"></script>
 </body>
 </html>
-<s:debug></s:debug>

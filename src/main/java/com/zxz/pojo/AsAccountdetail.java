@@ -11,9 +11,9 @@ public class AsAccountdetail implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = -4203940123620340430L;
-	private Long id;
-	private Long userId;
-	private Long detailType;
+	private Integer id;
+	private Integer userId;
+	private Integer detailType;
 	private String detailTypeName;
 	private Double money;
 	private Double accountMoney;
@@ -27,7 +27,7 @@ public class AsAccountdetail implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AsAccountdetail(Long userId, Long detailType, String detailTypeName, Double money, Double accountMoney,
+	public AsAccountdetail(Integer userId, Integer detailType, String detailTypeName, Double money, Double accountMoney,
 			Timestamp detailDateTime) {
 		this.userId = userId;
 		this.detailType = detailType;
@@ -38,7 +38,7 @@ public class AsAccountdetail implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AsAccountdetail(Long userId, Long detailType, String detailTypeName, Double money, Double accountMoney,
+	public AsAccountdetail(Integer userId, Integer detailType, String detailTypeName, Double money, Double accountMoney,
 			String memo, Timestamp detailDateTime) {
 		this.userId = userId;
 		this.detailType = detailType;
@@ -51,27 +51,27 @@ public class AsAccountdetail implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getUserId() {
+	public Integer getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
-	public Long getDetailType() {
+	public Integer getDetailType() {
 		return this.detailType;
 	}
 
-	public void setDetailType(Long detailType) {
+	public void setDetailType(Integer detailType) {
 		this.detailType = detailType;
 	}
 

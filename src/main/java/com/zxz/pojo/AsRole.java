@@ -11,7 +11,7 @@ public class AsRole implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = -838928086019053165L;
-	private Long id;
+	private Integer id;
 	private String roleName;
 	private Timestamp creationTime;
 	private String createdBy;
@@ -43,11 +43,11 @@ public class AsRole implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

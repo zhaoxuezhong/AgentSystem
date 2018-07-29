@@ -91,7 +91,7 @@
 	<!-- 配置interceptors -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/backend/**" />
+			<mvc:mapping path="/agent/**" />
 			<bean class="com.zxz.interceptor.SysInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

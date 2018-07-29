@@ -11,9 +11,9 @@ public class AsRolePremission implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = -6188413252566500901L;
-	private Long id;
-	private Long roleId;
-	private Long functionId;
+	private Integer id;
+	private Integer roleId;
+	private Integer functionId;
 	private Timestamp creationTime;
 	private String createdBy;
 	private Timestamp lastUpdateTime;
@@ -26,7 +26,7 @@ public class AsRolePremission implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AsRolePremission(Long roleId, Long functionId, Timestamp creationTime, String createdBy) {
+	public AsRolePremission(Integer roleId, Integer functionId, Timestamp creationTime, String createdBy) {
 		this.roleId = roleId;
 		this.functionId = functionId;
 		this.creationTime = creationTime;
@@ -34,7 +34,7 @@ public class AsRolePremission implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AsRolePremission(Long roleId, Long functionId, Timestamp creationTime, String createdBy,
+	public AsRolePremission(Integer roleId, Integer functionId, Timestamp creationTime, String createdBy,
 			Timestamp lastUpdateTime, Integer isStart) {
 		this.roleId = roleId;
 		this.functionId = functionId;
@@ -46,27 +46,27 @@ public class AsRolePremission implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getRoleId() {
+	public Integer getRoleId() {
 		return this.roleId;
 	}
 
-	public void setRoleId(Long roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
-	public Long getFunctionId() {
+	public Integer getFunctionId() {
 		return this.functionId;
 	}
 
-	public void setFunctionId(Long functionId) {
+	public void setFunctionId(Integer functionId) {
 		this.functionId = functionId;
 	}
 

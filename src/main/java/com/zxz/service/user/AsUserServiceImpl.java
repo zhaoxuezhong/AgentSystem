@@ -2,6 +2,7 @@ package com.zxz.service.user;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.zxz.dao.user.AsUserMapper;
@@ -12,6 +13,7 @@ import com.zxz.pojo.AsUser;
  *	AsUserServiceImpl
  */
 @Service
+@Scope("session")
 public class AsUserServiceImpl implements AsUserService {
 	@Resource
 	private AsUserMapper asUserMapper;

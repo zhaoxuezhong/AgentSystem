@@ -11,8 +11,8 @@ public class AsCustoms implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = -5259017670045804847L;
-	private Long id;
-	private Long agentId;
+	private Integer id;
+	private Integer agentId;
 	private String agentName;
 	private String customName;
 	private Integer customType;
@@ -41,12 +41,12 @@ public class AsCustoms implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AsCustoms(Long agentId) {
+	public AsCustoms(Integer agentId) {
 		this.agentId = agentId;
 	}
 
 	/** full constructor */
-	public AsCustoms(Long agentId, String agentName, String customName, Integer customType, String customTypeName,
+	public AsCustoms(Integer agentId, String agentName, String customName, Integer customType, String customTypeName,
 			String siteUrl, Integer customStatus, String bossName, Integer cardType, String cardTypeName,
 			String cardNum, String companyTel, String companyFax, Timestamp regDatetime, String country,
 			String province, String city, String area, String companyAddress, String memo, String agentCode) {
@@ -75,19 +75,19 @@ public class AsCustoms implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getAgentId() {
+	public Integer getAgentId() {
 		return this.agentId;
 	}
 
-	public void setAgentId(Long agentId) {
+	public void setAgentId(Integer agentId) {
 		this.agentId = agentId;
 	}
 

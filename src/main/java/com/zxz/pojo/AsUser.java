@@ -11,7 +11,7 @@ public class AsUser implements java.io.Serializable {
 	// Fields
 
 	private static final long serialVersionUID = 1449080659920949633L;
-	private Long id;
+	private Integer id;
 	private String userCode;
 	private String userName;
 	private String userPassword;
@@ -20,7 +20,7 @@ public class AsUser implements java.io.Serializable {
 	private String createdBy;
 	private Timestamp lastUpdateTime;
 	private Integer isStart;
-	private Long roleId;
+	private Integer roleId;
 
 	private String roleName;
 	
@@ -30,7 +30,7 @@ public class AsUser implements java.io.Serializable {
 	public AsUser() {
 	}
 
-	public AsUser(Long id, Timestamp lastLoginTime) {
+	public AsUser(Integer id, Timestamp lastLoginTime) {
 		super();
 		this.id = id;
 		this.lastLoginTime = lastLoginTime;
@@ -38,7 +38,7 @@ public class AsUser implements java.io.Serializable {
 
 	/** minimal constructor */
 	public AsUser(String userCode, String userName, String userPassword, Timestamp creationTime, String createdBy,
-			Long roleId) {
+			Integer roleId) {
 		this.userCode = userCode;
 		this.userName = userName;
 		this.userPassword = userPassword;
@@ -49,7 +49,7 @@ public class AsUser implements java.io.Serializable {
 
 	/** full constructor */
 	public AsUser(String userCode, String userName, String userPassword, Timestamp creationTime,
-			Timestamp lastLoginTime, String createdBy, Timestamp lastUpdateTime, Integer isStart, Long roleId) {
+			Timestamp lastLoginTime, String createdBy, Timestamp lastUpdateTime, Integer isStart, Integer roleId) {
 		this.userCode = userCode;
 		this.userName = userName;
 		this.userPassword = userPassword;
@@ -63,11 +63,11 @@ public class AsUser implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -135,11 +135,11 @@ public class AsUser implements java.io.Serializable {
 		this.isStart = isStart;
 	}
 
-	public Long getRoleId() {
+	public Integer getRoleId() {
 		return this.roleId;
 	}
 
-	public void setRoleId(Long roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 

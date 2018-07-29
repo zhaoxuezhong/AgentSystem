@@ -16,15 +16,9 @@ public class PageInfo<T> {
 	@SuppressWarnings("unused")
 	private Integer pageTotalCount;
 	private List<T> list;
+	private String url;
 	public PageInfo() {
 		super();
-	}
-	public PageInfo(Integer pageIndex, Integer pgaeSize, Integer totalCount,List<T> list) {
-		super();
-		this.pageIndex = pageIndex;
-		this.pageSize = pgaeSize;
-		this.totalCount = totalCount;
-		this.list = list;
 	}
 	public Integer getPageIndex() {
 		return pageIndex;
@@ -71,5 +65,11 @@ public class PageInfo<T> {
 	}
 	public void setPageTotalCount(Integer pageTotalCount) {
 		this.pageTotalCount = pageTotalCount;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

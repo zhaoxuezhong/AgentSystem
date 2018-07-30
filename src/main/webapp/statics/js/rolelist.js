@@ -25,10 +25,10 @@ $().ready(function() {
 		var b_roleId = b.attr('roleid');
 		if (confirm("您 确认要删除 吗?")) {
 			//delete
-			$.post("/deleterole.action",{'role.id':b_roleId},function(result){
+			$.post(path+"agent/role/deleterole/"+b_roleId,function(result){
 				if ("success" == result) {
 					humane.success("删除成功 ");
-					window.location.href = "/rolelist.action";
+					window.location.reload();
 				} else {
 					humane.error("删除失败");
 				}
@@ -41,13 +41,16 @@ $().ready(function() {
 		var a_isStart = $("#a_isStart").val();
 		if (a_roleName == '')
 			humane.error("角色名称不能为空");
-		$.post("/editrole.action?type=add", {
-			'role.roleName' : a_roleName,
-			'role.isStart' : a_isStart
+		var role =new Object();
+		role.roleName=a_roleName;
+		role.isStart=a_isStart;
+		$.post(path+"agent/role/editrole.json", {
+			'role':JSON.stringify(role),
+			'flag':'add'
 		}, function(result) {
 			if ("success" == result) {
 				humane.success("添加成功 ");
-				window.location.href = "/rolelist.action";
+				window.location.reload();
 			} else {
 				humane.error("添加失败");
 			}
@@ -60,14 +63,17 @@ $().ready(function() {
 		var m_isStart = $("#m_isStart").val();
 		if (m_roleName == '')
 			humane.error("角色名称不能为空");
-		$.post("/editrole.action?type=modify", {
-			'role.id' : m_id,
-			'role.roleName' : m_roleName,
-			'role.isStart' : m_isStart
+		var role =new Object();
+		role.id=m_id;
+		role.roleName=m_roleName;
+		role.isStart=m_isStart;
+		$.post(path+"agent/role/editrole.json", {
+			'role':JSON.stringify(role),
+			'flag':'modify'
 		}, function(result) {
 			if ("success" == result) {
 				humane.success("修改成功 ");
-				window.location.href = "/rolelist.action";
+				window.location.reload();
 			} else {
 				humane.error("修改失败");
 			}

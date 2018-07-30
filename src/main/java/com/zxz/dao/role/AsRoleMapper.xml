@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxz.dao.role.AsRoleMapper">
+
+	<select id="findAsRoleList" resultType="AsRole" parameterType="int">
+		select * from as_role 
+		<where>
+			<if test="isStart !=null">isStart=#{isStart}</if>
+		</where>
+	</select>
+	
+	<update id="updateAsRole" parameterType="AsRole">
+		UPDATE `as_role` 
+		<trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+			<if test="roleName !=null">`roleName` = #{roleName},</if>
+			<if test="lastUpdateTime !=null">`lastUpdateTime` = #{lastUpdateTime},</if>
+			<if test="isStart !=null">`isStart` = #{isStart}</if>
+		</trim> 
+	</update>
+	
+	<insert id="addAsRole" parameterType="AsRole">
+		INSERT INTO `as_role`
+		(`roleName`, `creationTime`, `createdBy`, `isStart`) 
+		VALUES (#{roleName}, #{creationTime}, #{createdBy}, #{isStart});
+	</insert>
+	
+	<delete id="deleteAsRole" parameterType="int">
+		delete from as_role where id=#{id}
+	</delete>
+
+</mapper>

@@ -11,10 +11,10 @@
 	<form>
 		<ul>
 			<li class="lititle"><br>添加角色信息
-			<li>角色名称:<input type="text" id="a_roleName" name="role.roleName"></li>
+			<li>角色名称:<input type="text" id="a_roleName" name="roleName"></li>
 			<li>是否启用:
-				<select id="a_isStart" name="role.isStart">
-					<option value="1" selected="true">启用</option>
+				<select id="a_isStart" name="isStart">
+					<option value="1" selected>启用</option>
 					<option value="0">停用</option>
 				</select>
 				
@@ -28,11 +28,11 @@
 	<div id="modifyRoleDiv" class="addRoleDivClass modifyback">
 		<ul>
 			<li class="lititle"><br>修改角色信息
-			<input type="hidden" id="m_roleId">
-			<li>角色名称:<input type="text" id="m_roleName" name="role.roleName"></li>
+			<input type="hidden" id="m_roleId" />
+			<li>角色名称:<input type="text" id="m_roleName" name="roleName"></li>
 			<li>是否启用:
-				<select id="m_isStart" name="role.isStart">
-					<option value="1" selected="true">启用</option>
+				<select id="m_isStart" name="isStart">
+					<option value="1" selected>启用</option>
 					<option value="0">停用</option>
 				</select>
 				
@@ -42,7 +42,7 @@
 		</ul>
 	</div>
 	<div class="addRoleDiv">
-		<input id="addRole" type="button" value="新增">
+		<input id="addRole" type="button" value="新增角色">
 	</div>
 	<!-- 角色列表 -->
 	<table>
@@ -55,29 +55,28 @@
 			</tr>
 		</thead>
 		<tbody>
-		<s:iterator value="roleList" status="st">
+		<c:forEach items="${roleList}" var="role">
 			<tr>
-				<td><s:property value="roleName"/></td>
-				<td><s:date name="creationTime" format="yyyy-MM-dd HH:mm:ss"/></td>
-				<td><s:if test="isStart==1">启用</s:if><s:else>停用</s:else></td>
+				<td>${role.roleName}</td>
+				<td>${role.creationTime}</td>
+				<td>${role.isStart==1?'启用':'停用'}</td>
 				<td>
 					<span class="modifyRole"
-								roleid="<s:property value="id"/>"
-								rolename="<s:property value="roleName"/>"
-								isstart="<s:property value="isStart"/>"> 修改</span> 
+								roleid="${role.id}"
+								rolename="${role.roleName}"
+								isstart="${role.isStart}"> 修改</span> 
 								| <span
 								class="deleteRole" 
-								roleid="<s:property value="id"/>"
-								rolename="<s:property value="roleName"/>"> 删除</span>
+								roleid="${role.id}"
+								rolename="${role.roleName}"> 删除</span>
 				</td>
 			</tr>
-			</s:iterator>
+		</c:forEach>
 		</tbody>
 	</table>
 </div>
 <jsp:include page="inc/foot.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/rolelist.css">
-<script type="text/javascript" src="/js/rolelist.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/rolelist.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/rolelist.js"></script>
 </body>
 </html>
-<s:debug></s:debug>

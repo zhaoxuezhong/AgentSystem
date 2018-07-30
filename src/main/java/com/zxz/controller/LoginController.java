@@ -66,7 +66,7 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "agent/main")
 	public String main(Model model,HttpSession session) {
 		String key="role"+this.getCurrentUser().getRoleId();
-		/*redisAPI.del(key);*/
+		redisAPI.del(key);
 		if(!redisAPI.exist(key)){
 			List<Map<String, Object>> menuList=asFunctionServiceImpl.findMenu(this.getCurrentUser().getRoleId());
 			if(null != menuList){

@@ -29,7 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="user.roleId !=null">and au.roleId=#{user.roleId}</if>
 			<if test="user.isStart !=null">and au.isStart=#{user.isStart}</if>
 		</where>
-		limit #{pageIndex},#{pageSize}
+		order by au.creationTime desc
+		<if test="pageIndex!=null and pageSize!=null">limit #{pageIndex},#{pageSize}</if>
 	</select>
 	
 	<update id="updateAsUser" parameterType="AsUser">
@@ -44,5 +45,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="roleId != null ">`roleId` = #{roleId}</if>
 		</trim>
 	</update>
+	
+	<insert id="addAsUser" parameterType="AsUser">
+		INSERT INTO `as_user`(`userCode`, `userName`, `userPassword`,
+		 `creationTime`, `createdBy`, `isStart`, `roleId`) 
+		 VALUES (#{userCode}, #{userName}, #{userPassword}, #{creationTime}, 
+		 #{createdBy},#{isStart}, #{roleId});
+	</insert>
+	
+	<delete id="deleteAsUser" parameterType="int">
+		delete from as_user where id=#{id}
+	</delete>
 
 </mapper>

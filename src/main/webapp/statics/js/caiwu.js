@@ -55,10 +55,8 @@ function loadUsers() {
 	if ($("#searchUserText").val() == "" || $("#searchUserText").val() == null) {
 		return false;
 	}
-	var user = new Object();
-	user.userCode = $("#searchUserText").val();
 	$.post(path + "agent/user/searchuser.json", {
-		'user' : JSON.stringify(user)
+		'userCode' : $("#searchUserText").val()
 	}, function(data) {
 		// result 是List<User> 的json格式
 		if (data.userList != "null") {

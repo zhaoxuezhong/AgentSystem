@@ -1,4 +1,4 @@
-package com.zxz.service.menu;
+package com.zxz.service.function;
 
 import java.util.List;
 import java.util.Map;

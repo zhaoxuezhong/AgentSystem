@@ -34,17 +34,19 @@ $().ready(function() {
 		else if (a_roleId == '')
 			humane.error('请选择角色');
 		else {
-
-			$.post("/edituser.action?type=add", {
-				'user.userCode' : a_userCode,
-				'user.userName' : a_userName,
-				'user.userPassword' : a_userPassword,
-				'user.roleId' : a_roleId,
-				'user.isStart' : a_isStart
+			var user=new Object();
+			user.userCode = a_userCode;
+			user.userName = a_userName;
+			user.userPassword= a_userPassword;
+			user.roleId = a_roleId;
+			user.isStart = a_isStart;
+			$.post(path+"/agent/user/edituser", {
+				'user':JSON.stringify(user),
+				'flag':'add'
 			}, function(result) {
 				if (result == 'success') {
 					humane.success('添加成功');
-					window.location.href = '/userlist.action';
+					window.location.reload();
 				} else if ("repeat" == result) {
 
 					humane.error("登录 账号已存在");
@@ -84,18 +86,20 @@ $().ready(function() {
 		else if (m_roleId == '')
 			humane.error('请选择角色');
 		else {
-
-			$.post("/edituser.action?type=modify", {
-				'user.id' : m_userId,
-				'user.userCode' : m_userCode,
-				'user.userName' : m_userName,
-				'user.userPassword' : m_userPassword,
-				'user.roleId' : m_roleId,
-				'user.isStart' : m_isStart
+			var user=new Object();
+			user.id = m_userId;
+			user.userCode = m_userCode;
+			user.userName = m_userName;
+			user.userPassword= m_userPassword;
+			user.roleId = m_roleId;
+			user.isStart = m_isStart;
+			$.post(path+"agent/user/edituser", {
+				'user':JSON.stringify(user),
+				'flag':'modify'
 			}, function(result) {
 				if (result == 'success') {
 					humane.success('修改成功');
-					window.location.href = '/userlist.action';
+					window.location.reload();
 				} else if ("repeat" == result) {
 
 					humane.error("登录 账号已存在");
@@ -115,17 +119,15 @@ $().ready(function() {
 		if (d_userRoleId == 1) {
 			alert("该 账号角色为:系统管理员!不能被 删除!");
 			return;
-
 		}
 		if (confirm("您 确定要删除[" + d_userCode + "]吗?")) {
 			// delete
-			$.post("/deluser.action", {
-				'user.id' : d_userId
+			$.post(path+"/agent/user/deluser", {
+				'id' : d_userId
 			}, function(result) {
-
 				if (result == 'success') {
 					humane.success('删除成功');
-					window.location.href = '/userlist.action';
+					window.location.reload();
 				} else
 					humane.error("删除失败");
 			}, 'html');

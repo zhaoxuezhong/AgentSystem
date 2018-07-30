@@ -1,4 +1,4 @@
-package com.zxz.service.menu;
+package com.zxz.service.function;
 
 import java.util.ArrayList;
 import java.util.HashMap;

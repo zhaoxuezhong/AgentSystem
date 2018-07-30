@@ -5,7 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.zxz.dao.systemconfig.AsSystemconfigMapper">
 
 	<select id="findAsSystemconfigList" resultType="AsSystemconfig">
-		select * from as_systemconfig where configType=#{configType} and isStart=#{isStart};
+		select * from as_systemconfig 
+		<where>
+			<if test="configType !=null">configType=#{configType}</if>
+			<if test="isStart !=null">and isStart=#{isStart}</if>
+		</where>
 	</select>
 	
 	<select id="getMaxConfigTypeValue" resultType="int" parameterType="int">

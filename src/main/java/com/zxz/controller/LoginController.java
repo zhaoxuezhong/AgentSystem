@@ -17,7 +17,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.zxz.pojo.AsAccount;
 import com.zxz.pojo.AsUser;
 import com.zxz.service.account.AsAccountService;
-import com.zxz.service.menu.AsRolePremissioinService;
+import com.zxz.service.function.AsRolePremissioinService;
 import com.zxz.service.user.AsUserService;
 import com.zxz.utils.Constants;
 import com.zxz.utils.RedisAPI;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.zxz.pojo.AsFunction;
 import com.zxz.pojo.AsRole;
-import com.zxz.service.menu.AsRolePremissioinService;
+import com.zxz.service.function.AsRolePremissioinService;
 import com.zxz.service.role.AsRoleService;
 
 @Controller

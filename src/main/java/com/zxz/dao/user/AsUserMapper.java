@@ -18,6 +18,10 @@ public interface AsUserMapper {
 	
 	int getAsUserCount(AsUser user);
 	
+	int addAsUser(AsUser user);
+	
+	int deleteAsUser(Integer id);
+	
 	List<AsUser> findAsUserList(@Param("user")AsUser user,@Param("pageIndex")Integer pageIndex,@Param("pageSize")Integer pageSize);
 	
 }

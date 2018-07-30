@@ -2,6 +2,8 @@ package com.zxz.dao.role;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.zxz.pojo.AsRole;
 
 /**
@@ -10,7 +12,7 @@ import com.zxz.pojo.AsRole;
  */
 public interface AsRoleMapper {
 	
-	List<AsRole> findAsRoleList(Integer isStart);
+	List<AsRole> findAsRoleList(@Param("isStart")Integer isStart);
 
 	int addAsRole(AsRole role);
 	

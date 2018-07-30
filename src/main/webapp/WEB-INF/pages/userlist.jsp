@@ -1,8 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="inc/head.jsp"></jsp:include><div class="mbxnav">
+<jsp:include page="inc/head.jsp"></jsp:include>
+<div class="mbxnav">
 	<!-- 导航 -->
-	系统管理\ <a href="/userlist.action">用户管理</a>
+	系统管理\ <a href="javasrcipt:void(0)">用户管理</a>
 </div>
 <div class="container">
 
@@ -11,19 +12,22 @@
 
 		<ul>
 			<li class="lititle"><br>添加代理商用户信息
-			<li>登录账号:<input type="text" id="a_userCode" name="user.userCode"><span>*</span>
+			<li>登录账号:<input type="text" id="a_userCode" name="userCode"><span>*</span>
 			</li>
 			<li>登录名称 :<input type="text" id="a_userName"
-				name="user.userName"><span>*</span></li>
+				name="userName"><span>*</span></li>
 			<li>登录 密码 :<input type="password" id="a_userPassword"
-				name="user.userPassword" value="123456"><span>*默认初始密码为123456</span>
+				name="userPassword" value="123456"><span>*默认初始密码为123456</span>
 			</li>
-			<li>角色: <s:select id="a_roleId" name="user.roleId" headerKey=""
-					headerValue="--请选择--" list="roleList" listKey="id"
-					listValue="roleName"></s:select>
+			<li>角色: 
+					<select id="a_roleId" name="roleId" >
+				<c:forEach items="${roleList}" var="role">
+					<option value="${role.id }">${role.roleName }</option>
+				</c:forEach>
+			</select>
 			</li>
-			<li>是否启用: <select id="a_isStart" name="user.isStart">
-					<option value="1" selected="true">启用</option>
+			<li>是否启用: <select id="a_isStart" name="isStart">
+					<option value="1" selected>启用</option>
 					<option value="0">停用</option>
 			</select> <span>*</span> <input id="addUserSubmit" type="button" value="保存">
 				<input id="addCancel" type="reset" value="取消">
@@ -35,20 +39,24 @@
 	<div id="modifyUserDiv" class="addUserDivClass modifyback">
 		<ul>
 			<li class="lititle"><br>修改代理商用户信息 <input type="hidden"
-				id="m_userId" name="user.id" />
-			<li>登录账号:<input type="text" id="m_userCode" name="user.userCode"><span>*</span>
+				id="m_userId" name="id" />
+			<li>登录账号:<input type="text" id="m_userCode" name="userCode"><span>*</span>
 			</li>
 			<li>登录名称 :<input type="text" id="m_userName"
-				name="user.userName"><span>*</span></li>
+				name="userName"><span>*</span></li>
 			<li>登录 密码 :<input type="password" id="m_userPassword"
-				name="user.userPassword" value="123456"><span>*默认初始密码为123456</span>
+				name="userPassword" value="123456"><span>*默认初始密码为123456</span>
 			</li>
-			<li>角色: <s:select id="m_roleId" name="user.roleId" headerKey=""
-					headerValue="--请选择--" list="roleList" listKey="id"
-					listValue="roleName"></s:select>
+			<li>角色:
+			<select id="m_roleId" name="roleId" >
+				<c:forEach items="${roleList}" var="role">
+					<option value="${role.id }">${role.roleName }</option>
+				</c:forEach>
+			</select>
 			</li>
-			<li>是否启用: <select id="m_isStart" name="user.isStart">
-					<option value="1" selected="true">启用</option>
+			<li>是否启用: <select id="m_isStart" name="isStart">
+					<option value="">--请选择--</option>
+					<option value="1" selected>启用</option>
 					<option value="0">停用</option>
 			</select> <span>*</span> <input id="modifyUserSubmit" type="button" value="保存">
 				<input id="modifyCancel" type="reset" value="取消">
@@ -57,21 +65,29 @@
 	</div>
 
 	<div class="addUserDiv">
-		<input id="addUser" type="button" value="新增">
+		<input id="addUser" type="button" value="新增用户">
 	</div>
 
 
 	<!-- 用户搜索 -->
 	<div>
-		<form action="/userlist.action" method="post">
-			用户名称:<input type="text" name="uname"
-				value="<s:property value="uname"/>"> 角色:
-			<%-- <s:select name="user.roleId" headerKey="" headerValue="--请选择--"
-				list="roleList" listKey="id" listValue="roleName"></s:select>
+		<form action="agent/user/userList.html" method="post">
+			用户名称:<input type="text" name="userName"
+				value="${asUser.userName}"> 角色:
+			<select name="roleId" >
+			<option value="">--请选择--</option>
+				<c:forEach items="${roleList}" var="role">
+					<option value="${role.id }" ${role.id==asUser.roleId?'selected':''}>${role.roleName }</option>
+				</c:forEach>
+			</select>
 			是否启用:
-			<s:select name="user.isStart" list="#{'1':'启用', '0':'未启用'}"></s:select> --%>
-
+			<select name="isStart">
+			<option value="">--请选择--</option>
+					<option value="1" ${asUser.isStart==1?'selected':''}>启用</option>
+				<option value="0" ${asUser.isStart==0?'selected':''}>未启用</option>
+			</select>
 			<input type="submit" value="查询">
+			<input type="hidden" name="pageIndex" value="1" />
 		</form>
 	</div>
 	<!-- 用户列表 -->
@@ -87,40 +103,42 @@
 			</tr>
 		</thead>
 		<tbody>
-			<s:iterator value="userList" status="st">
-				
+			<c:if test="${empty userList.list}">
 				<tr>
-					<td><s:property value="userCode" /></td>
-					<td><s:property value="userName" /></td>
-					<td><s:property value="roleName" /></td>
-					<td><s:date name="creationTime" format="yyyy-MM-dd HH:mm:ss" />
+					<td colspan="6">查无数据</td>
+					</tr>
+			</c:if>
+			<c:forEach items="${userList.list}" var="user">
+				<tr>
+					<td>${user.userCode}</td>
+					<td>${user.userName}</td>
+					<td>${user.roleName}</td>
+					<td>${user.creationTime}
 					</td>
-					<td><s:if test="isStart==1">启用</s:if> <s:else>停用</s:else></td>
+					<td>${user.isStart==1?'启用':'停用'}</td>
 					<td><span class="modifyUser"
-						userid='<s:property value="id" />'
-						usercode='<s:property value="userCode" />'
-						username='<s:property value="userName" />'
-						userpassword='<s:property value="userPassword" />'
-						isstart='<s:property value="isStart" />'
-						roleid='<s:property value="roleId" />'> 修改</span> | <span
-						userid='<s:property value="id" />'
-						usercode='<s:property value="userCode" />'
-						roleid='<s:property value="roleId" />' class="deleteUser">
+						userid='${user.id}'
+						usercode='${user.userCode}'
+						username='${user.userName}'
+						userpassword='${user.userPassword}'
+						isstart='${user.isStart}'
+						roleid='${user.roleId}'> 修改</span> | <span
+						userid='${user.id}'
+						usercode='${user.userCode}'
+						roleid='${user.roleId}' class="deleteUser">
 							删除</span> | 
 							<span><a
-							href="javascript:ymPrompt.win('/yfklist.action?user.id=<s:property value="id" />&user.userCode=<s:property value="userCode" />',1000,500,'预付款',null,null,null,true)">预付款</a></span> | 
+							href="javascript:ymPrompt.win('/yfklist.action?id=${user.id}&userCode=${user.userCode}',1000,500,'预付款',null,null,null,true)">预付款</a></span> | 
 							<span><a
-							href="javascript:ymPrompt.win('/loglist.action?user.id=<s:property value="id" />&user.userCode=<s:property value="userCode" />',1000,500,'LOG日志',null,null,null,true)">LOG日志</a>
+							href="javascript:ymPrompt.win('/loglist.action?id=${user.id}&userCode=${user.userCode}',1000,500,'LOG日志',null,null,null,true)">LOG日志</a>
 					</span></td>
-
-
-
 				</tr>
-			</s:iterator>
+			</c:forEach>
 		</tbody>
 	</table>
-	
-	<div class="pagination pagination-centered">
+	<c:set value="${userList}" var="pager"></c:set>
+	<%@ include file="inc/pagination.jsp" %>
+	<%-- <div class="pagination pagination-centered">
 				<ul>
 					<li><a
 						href="/userlist.action?pager.page=1&uname=<s:property value="uname" />&user.roleId=<s:property value="user.roleId" />&user.isStart=<s:property value="user.isStart"/>">首页</a>
@@ -143,11 +161,10 @@
 					href="/userlist.action?pager.page=<s:property value="pager.pageCount"/>&uname=<s:property value="uname" />&user.roleId=<s:property value="user.roleId" />&user.isStart=<s:property value="user.isStart"/>">尾页</a>
 					</li>
 				</ul>
-			</div>
+			</div> --%>
 </div>
 <jsp:include page="inc/foot.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/userlist.css">
-<script type="text/javascript" src="/js/userlist.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/userlist.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/userlist.js"></script>
 </body>
 </html>
-<s:debug></s:debug>

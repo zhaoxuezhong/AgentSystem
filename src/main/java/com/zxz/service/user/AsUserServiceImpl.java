@@ -43,4 +43,14 @@ public class AsUserServiceImpl implements AsUserService {
 		return pageInfo;
 	}
 
+	@Override
+	public boolean addAsUser(AsUser user) {
+		return asUserMapper.addAsUser(user)>0;
+	}
+
+	@Override
+	public boolean deleteAsUser(Integer id) {
+		return asUserMapper.deleteAsUser(id)>0;
+	}
+
 }

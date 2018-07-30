@@ -42,7 +42,7 @@
 		</tbody>
 	</table>
 	<c:set value="${accountDetailList}" var="pager"/>
-	<jsp:include page="inc/pagination.jsp" ></jsp:include>
+	<%@ include file="inc/pagination.jsp" %>
 </div>
 <jsp:include page="inc/foot.jsp"></jsp:include>
 </body>

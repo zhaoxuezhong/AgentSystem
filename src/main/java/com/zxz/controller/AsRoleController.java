@@ -45,7 +45,6 @@ public class AsRoleController extends BaseController{
 		return result?"success":"false";
 	}
 	
-	
 	@RequestMapping(value="deleterole/{id}")
 	@ResponseBody
 	public String deleterole(@PathVariable("id")Integer id){

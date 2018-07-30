@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.zxz.dao.menu.AsRolePremissionMapper;
+import com.zxz.dao.function.AsRolePremissionMapper;
 import com.zxz.pojo.AsFunction;
 
 /**
@@ -17,7 +17,7 @@ import com.zxz.pojo.AsFunction;
  *	AsFunctionServiceImpl
  */
 @Service
-public class AsFunctionServiceImpl implements AsFunctionService {
+public class AsRolePremissioinServiceImpl implements AsRolePremissioinService {
 	@Resource
 	private AsRolePremissionMapper asRolePremissionMapper;
 
@@ -35,6 +35,11 @@ public class AsFunctionServiceImpl implements AsFunctionService {
 			}
 		}
 		return menuList;
+	}
+
+	@Override
+	public List<AsFunction> findAsFunctionList(Integer roleId) {
+		return asRolePremissionMapper.findRoleFunctionList(null, roleId);
 	}
 
 }

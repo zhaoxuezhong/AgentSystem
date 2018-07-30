@@ -17,7 +17,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.zxz.pojo.AsAccount;
 import com.zxz.pojo.AsUser;
 import com.zxz.service.account.AsAccountService;
-import com.zxz.service.menu.AsFunctionService;
+import com.zxz.service.menu.AsRolePremissioinService;
 import com.zxz.service.user.AsUserService;
 import com.zxz.utils.Constants;
 import com.zxz.utils.RedisAPI;
@@ -31,7 +31,7 @@ public class LoginController extends BaseController {
 	@Resource
 	private AsUserService asUserServiceImpl;
 	@Resource
-	private AsFunctionService asFunctionServiceImpl;
+	private AsRolePremissioinService asRolePremissioinServiceImpl;
 	@Resource
 	private AsAccountService asAccountServiceImpl;
 	@Resource
@@ -68,7 +68,7 @@ public class LoginController extends BaseController {
 		String key="role"+this.getCurrentUser().getRoleId();
 		redisAPI.del(key);
 		if(!redisAPI.exist(key)){
-			List<Map<String, Object>> menuList=asFunctionServiceImpl.findMenu(this.getCurrentUser().getRoleId());
+			List<Map<String, Object>> menuList=asRolePremissioinServiceImpl.findMenu(this.getCurrentUser().getRoleId());
 			if(null != menuList){
 				session.setAttribute("menuList", menuList);
 				redisAPI.set(key, JSONArray.toJSONString(menuList));

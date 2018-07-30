@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxz.dao.function.AsRolePremissionMapper">
+
+	<select id="findRoleFunctionList" resultType="AsFunction">
+		select af.* from as_role_premission  arp
+		RIGHT JOIN as_function af on arp.functionId =af.id
+		<where>
+			<if test="parentId !=null">af.parentId=#{parentId}</if>
+			<if test="roleId !=null"> and arp.roleId=#{roleId}</if>
+		</where>  
+		
+	</select>
+	
+</mapper>

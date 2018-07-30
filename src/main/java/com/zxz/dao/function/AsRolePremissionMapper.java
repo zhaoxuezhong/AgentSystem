@@ -1,4 +1,4 @@
-package com.zxz.dao.menu;
+package com.zxz.dao.function;
 
 import java.util.List;
 

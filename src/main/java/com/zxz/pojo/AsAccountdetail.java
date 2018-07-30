@@ -15,8 +15,8 @@ public class AsAccountdetail implements java.io.Serializable {
 	private Integer userId;
 	private Integer detailType;
 	private String detailTypeName;
-	private Double money;
-	private Double accountMoney;
+	private Double money;//账务资金
+	private Double accountMoney;//账户余额
 	private String memo;
 	private Timestamp detailDateTime;
 

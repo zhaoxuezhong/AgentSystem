@@ -10,6 +10,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userCode=#{userCode} and userPassword=#{userPassword} and au.isStart=1;
 	</select>
 	
+	<select id="getAsUserCount" resultType="int" parameterType="AsUser">
+		select count(1) from as_user 
+		<where>
+			<if test="userCode !=null">userCode like concat('%',#{userCode},'%')</if>
+			<if test="userName !=null">and userName like concat('%',#{userName},'%')</if>
+			<if test="roleId !=null">and roleId=#{roleId}</if>
+			<if test="isStart !=null">and isStart=#{isStart}</if>
+		</where>
+	</select>
+	
+	<select id="findAsUserList" resultType="AsUser" >
+		select au.*,ar.roleName roleName from as_user au
+		INNER JOIN as_role ar ON au.roleId=ar.id
+		<where>
+			<if test="user.userCode !=null">au.userCode like concat('%',#{user.userCode},'%')</if>
+			<if test="user.userName !=null">and au.userName like concat('%',#{user.userName},'%')</if>
+			<if test="user.roleId !=null">and au.roleId=#{user.roleId}</if>
+			<if test="user.isStart !=null">and au.isStart=#{user.isStart}</if>
+		</where>
+		limit #{pageIndex},#{pageSize}
+	</select>
+	
 	<update id="updateAsUser" parameterType="AsUser">
 		UPDATE `as_user` 
 		<trim prefix="set" suffixOverrides="," suffix="WHERE `id` = #{id}">

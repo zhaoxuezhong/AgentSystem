@@ -12,5 +12,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *from as_accountdetail where userId=#{userId} limit #{pageIndex},#{pageSize}
 	</select>
 	
+	<insert id="addAsAccountdetail" parameterType="AsAccountdetail">
+		INSERT INTO `as_accountdetail`(`userId`, `detailType`, `detailTypeName`, 
+		`money`, `accountMoney`, `memo`, `detailDateTime`) 
+		VALUES (#{userId}, #{detailType}, #{detailTypeName}, #{money},
+		 #{accountMoney}, #{memo}, #{detailDateTime});
+	</insert>
+	
+	<update id="updateAsAccountdetail" parameterType="AsAccountdetail">
+		UPDATE `as_accountdetail` 
+		<trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+			<if test="detailType !=null">`detailType` = #{detailType},</if>
+			<if test="detailTypeName !=null">`detailTypeName` = #{detailTypeName},</if>
+			<if test="memo !=null">`memo` = #{memo},</if>
+		</trim>
+	</update>
+	
+	<delete id="deleteAsAccountdetail" parameterType="AsAccountdetail">
+		<if test="id !=null">
+			delete from as_accountdetail where id=#{id}
+		</if>
+		<if test="uesrId !=null">
+			delete from as_accountdetail where userId=#{userId}
+		</if>
+	</delete>
 
 </mapper>

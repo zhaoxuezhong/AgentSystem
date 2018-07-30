@@ -3,7 +3,7 @@
 <jsp:include page="inc/head.jsp"></jsp:include>
 <div class="mbxnav">
 	<!-- 导航 -->
-	系统管理\ <a href="/rolelist.action">角色管理</a>
+	系统管理\ <a href="">角色管理</a>
 </div>
 <div class="container">
 	<!-- 添加面板 -->

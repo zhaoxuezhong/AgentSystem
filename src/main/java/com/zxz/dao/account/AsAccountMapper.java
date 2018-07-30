@@ -11,4 +11,6 @@ public interface AsAccountMapper {
 	AsAccount findAsAccountByUserId(Integer userId);
 	
 	int updateAsAccount(AsAccount account);
+	
+	int addAsAccount(AsAccount account);
 }

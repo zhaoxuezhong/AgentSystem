@@ -66,10 +66,10 @@
 		<form action="/userlist.action" method="post">
 			用户名称:<input type="text" name="uname"
 				value="<s:property value="uname"/>"> 角色:
-			<s:select name="user.roleId" headerKey="" headerValue="--请选择--"
+			<%-- <s:select name="user.roleId" headerKey="" headerValue="--请选择--"
 				list="roleList" listKey="id" listValue="roleName"></s:select>
 			是否启用:
-			<s:select name="user.isStart" list="#{'1':'启用', '0':'未启用'}"></s:select>
+			<s:select name="user.isStart" list="#{'1':'启用', '0':'未启用'}"></s:select> --%>
 
 			<input type="submit" value="查询">
 		</form>

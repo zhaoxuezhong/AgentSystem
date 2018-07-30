@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.zxz.dao.user.AsUserMapper;
 import com.zxz.pojo.AsUser;
+import com.zxz.utils.PageInfo;
 
 /**
  * @author zhaoxuezhong
@@ -26,6 +27,20 @@ public class AsUserServiceImpl implements AsUserService {
 	@Override
 	public boolean updateAsUser(AsUser user) {
 		return asUserMapper.updateAsUser(user)>0;
+	}
+
+	@Override
+	public PageInfo<AsUser> findAsUserList(AsUser user, Integer pageIndex, Integer pageSize) {
+		PageInfo<AsUser> pageInfo=new PageInfo<AsUser>();
+		Integer totalCount= asUserMapper.getAsUserCount(user);
+		if (totalCount!=null&&totalCount!=0) {
+			pageInfo.setTotalCount(totalCount);
+			pageInfo.setPageSize(pageSize);
+			pageInfo.setPageIndex(pageIndex);
+			pageInfo.setList(asUserMapper.findAsUserList(user, 
+					(pageInfo.getPageIndex()-1)*pageInfo.getPageSize(), pageInfo.getPageSize()));
+		}
+		return pageInfo;
 	}
 
 }

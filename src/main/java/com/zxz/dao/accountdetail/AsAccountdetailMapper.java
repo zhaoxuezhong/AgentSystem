@@ -16,4 +16,11 @@ public interface AsAccountdetailMapper {
 	
 	List<AsAccountdetail> findAsAccountdetailList(@Param("userId")Integer userId,
 			@Param("pageIndex") Integer pageIndex,@Param("pageSize") Integer pageSize);
+	
+	int addAsAccountdetail(AsAccountdetail accountDetail);
+	
+	int updateAsAccountdetail(AsAccountdetail accountDetail);
+	
+	int deleteAsAccountdetail(AsAccountdetail accountDetail);
+	
 }

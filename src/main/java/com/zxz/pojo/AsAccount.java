@@ -10,8 +10,10 @@ public class AsAccount implements java.io.Serializable {
 	private static final long serialVersionUID = -1286548958241553185L;
 	private Integer id;
 	private Integer userId;
+	private String userName;
 	private Double money;
 	private Double moneyBak;
+	private AsAccountdetail accountDetail;
 
 	// Constructors
 
@@ -58,6 +60,22 @@ public class AsAccount implements java.io.Serializable {
 
 	public void setMoneyBak(Double moneyBak) {
 		this.moneyBak = moneyBak;
+	}
+
+	public AsAccountdetail getAccountDetail() {
+		return accountDetail;
+	}
+
+	public void setAccountDetail(AsAccountdetail accountDetail) {
+		this.accountDetail = accountDetail;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

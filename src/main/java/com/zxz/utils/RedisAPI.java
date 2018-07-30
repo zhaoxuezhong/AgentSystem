@@ -80,4 +80,23 @@ public class RedisAPI {
 		
 		return value;
 	}
+	
+	/**
+	 * 删除数据
+	 * @param key
+	 * @return
+	 */
+	public Long del(String key){
+		Jedis jedis = null;
+		try{
+			jedis = jedisPool.getResource();
+			return jedis.del(key);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			//返还到连接池
+			returnResource(jedisPool, jedis);
+		}
+		return 0L;
+	}
 }

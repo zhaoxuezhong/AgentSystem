@@ -27,7 +27,7 @@ public class AsSystemconfigController extends BaseController{
 	
 	@RequestMapping(value="list/{configType}")
 	public String systemConfigList(@PathVariable("configType")Integer configType,Model model){
-		List<AsSystemconfig> systemConfigList= asSystemconfigServiceImpl.findAsSystemconfigList(configType,1);
+		List<AsSystemconfig> systemConfigList= asSystemconfigServiceImpl.findAsSystemconfigList(configType,null);
 		model.addAttribute("systemConfigList", systemConfigList);
 		model.addAttribute("configType", configType);
 		return pages("systemconfig");
@@ -54,4 +54,12 @@ public class AsSystemconfigController extends BaseController{
 	public String deleteconfig(Integer id){
 		return asSystemconfigServiceImpl.deleteAsSystemconfig(id)?"success":"false";
 	}
+	
+	@RequestMapping(value="caiwu")
+	public String caiwu(Model model){
+		List<AsSystemconfig> accountConfigList=asSystemconfigServiceImpl.findAsSystemconfigList(1, 1);
+		model.addAttribute("accountConfigList", accountConfigList);
+		return pages("caiwu");
+	}
+	
 }

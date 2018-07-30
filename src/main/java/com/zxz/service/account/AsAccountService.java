@@ -15,4 +15,6 @@ public interface AsAccountService {
 	PageInfo<AsAccountdetail> findAsAccountdetailList(Integer userId,Integer pageIndex,Integer pageSize);
 	
 	boolean updateAsAccount(AsAccount account);
+	
+	boolean addAsAccount(AsAccount account);
 }

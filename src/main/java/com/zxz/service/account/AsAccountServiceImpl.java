@@ -1,5 +1,7 @@
 package com.zxz.service.account;
 
+import java.sql.Timestamp;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -28,7 +30,18 @@ public class AsAccountServiceImpl implements AsAccountService {
 
 	@Override
 	public boolean updateAsAccount(AsAccount account) {
-		return asAccountMapper.updateAsAccount(account)>0;
+		AsAccountdetail accountDetail=account.getAccountDetail();
+		accountDetail.setDetailDateTime(new Timestamp(System.currentTimeMillis()));
+		accountDetail.setUserId(account.getUserId());
+		accountDetail.setMoney(account.getMoney());
+		AsAccount reAccount=asAccountMapper.findAsAccountByUserId(account.getUserId());
+		//余额
+		Double money=reAccount.getMoney()+account.getMoney();
+		accountDetail.setAccountMoney(money);
+		account.setMoney(money);
+		account.setId(reAccount.getId());
+		return asAccountdetailMapper.addAsAccountdetail(accountDetail)>0
+				&&asAccountMapper.updateAsAccount(account)>0;
 	}
 
 	@Override
@@ -43,6 +56,11 @@ public class AsAccountServiceImpl implements AsAccountService {
 					(pageInfo.getPageIndex()-1)*pageInfo.getPageSize(), pageInfo.getPageSize()));
 		}
 		return pageInfo;
+	}
+
+	@Override
+	public boolean addAsAccount(AsAccount account) {
+		return asAccountMapper.addAsAccount(account)>0;
 	}
 
 }

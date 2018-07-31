@@ -3,13 +3,13 @@
 <jsp:include page="inc/head.jsp"></jsp:include>
 <div class="mbxnav">
 	<!-- 导航 -->
-	代理商管理\ <a href="/accounthetail.action">代理商客户管理</a>
+	代理商管理\ <a href="javascript:void(0)">代理商客户管理</a>
 </div>
 <div class="container">
-	<form action="/customlist.action" method="post">
+	<form action="agent/customs/customlist" method="post">
 		<div>
 			<label>客户名称:</label>
-			<input type="text" id="cname" name="custom.customName" value="${custom.customName}">
+			<input type="text" id="cname" name="customName" value="${asCustoms.customName}">
 			<input type="submit" value="查询"/>
 			
 		</div>
@@ -32,7 +32,27 @@
 			</tr>
 		</thead>
 		<tbody>
-			<s:iterator value="pager.items" status="st">
+		<c:forEach items="${customsList.list}" var="customs" varStatus="st">
+			<tr>
+					<td>${st.index+1}</td>
+					<td>${customs.customName}</td>
+					<td>${customs.bossName}</td>
+					<td>${customs.regDatetime}</td>
+					<td>${customs.customTypeName}</td>
+					<td>${customs.customStatus==1?'启用':'停用'}</td>					
+					<td class="funcli">
+						<ul>
+							<li><a class="viewCustom" id="${customs.id}">查看 </a> </li>
+							<li><a class="modifyCustom" id="${customs.id}"> 修改</a></li>
+							<li><a class="mofifyCustomStatus" id="${customs.id}" customName="${customs.customName}" mStatus="${customs.customStatus}">
+							${customs.customStatus==0?'<font color=\"green\">启用</font>':'<font color=\"red\">停用</font>'}
+							</a> </li>
+						</ul>
+					
+					</td>
+				</tr>
+		</c:forEach>
+			<%-- <s:iterator value="pager.items" status="st">
 				<tr>
 					<td>${st.index+1}</td>
 					<td>${customName}</td>
@@ -55,38 +75,15 @@
 					
 					</td>
 				</tr>
-			</s:iterator>
+			</s:iterator> --%>
 		</tbody>
 	</table>
-	<div class="pagination pagination-centered">
-				<ul>
-					<li><a
-						href="/customlist.action?pager.page=1&custom.customName=<s:property value="custom.customName" />">首页</a>
-					</li>
-					<s:if test="pager.prevPages!=null">
-						<s:iterator value="pager.prevPages"  var="num">
-							<li><a href="/customlist.action?pager.page=<s:property value="#num"/>&custom.customName=<s:property value="custom.customName" />"><s:property value="#num"/></a></li>
-						</s:iterator>
-					</s:if>
-					<li class="active">
-						<a href="#"><s:property value="pager.page"/></a>
-					</li>
-					<s:if test="pager.nextPages!=null">
-						<s:iterator value="pager.nextPages" var="num">
-							<li><a href="/customlist.action?pager.page=<s:property value="#num"/>&custom.customName=<s:property value="custom.customName" />"><s:property value="#num"/></a></li>
-						
-						</s:iterator>
-					</s:if>
-					<li><a 					
-					href="/customlist.action?pager.page=<s:property value="pager.pageCount"/>&custom.customName=<s:property value="custom.customName" />">尾页</a>
-					</li>
-				</ul>
-			</div>
-	
+	<c:set var="pager" value="${customsList}"></c:set>
+	<%@ include file="inc/pagination.jsp" %>
 </div>
 <jsp:include page="inc/foot.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/customlist.css">
-<script type="text/javascript" src="/js/customlist.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/customlist.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/customlist.js"></script>
 </body>
 </html>
 <s:debug></s:debug>

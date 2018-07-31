@@ -15,11 +15,11 @@ $().ready(function() {
 		
 		var s_province=$("#customprovince").val();
 		//ajax请求,按省份获取相应城市列表
-		$.post("/loadcity.action",{"province.provinceID":s_province},function(result){
+		$.post(path+"agent/customs/loadcity.json",{"provinceId":s_province},function(result){
 			//result cityList
 			if(result!=""){
-				for(var i=0;i<result.length;i++)
-					$("#customcity").append("<option value='"+result[i].cityID+"'>"+result[i].city+"</option>");			
+				for(var i=0;i<result.cityList.length;i++)
+					$("#customcity").append("<option value='"+result.cityList[i].cityId+"'>"+result.cityList[i].city+"</option>");			
 			}
 			else{
 				
@@ -35,11 +35,11 @@ $().ready(function() {
 		$("#customarea").append("<option value='' selected='selected'>--请选择--</option>");		
 		var s_city=$("#customcity").val();
 		//ajax请求,按城市获取相应的区
-		$.post("/loadarea.action",{"city.cityID":s_city},function(result){
+		$.post(path+"agent/customs/loadarea.json",{"cityId":s_city},function(result){
 			//result areaList
 			if(result!=""){
-				for(var i=0;i<result.length;i++)
-					$("#customarea").append("<option value='"+result[i].areaID+"'>"+result[i].area+"</option>");			
+				for(var i=0;i<result.areaList.length;i++)
+					$("#customarea").append("<option value='"+result.areaList[i].areaId+"'>"+result.areaList[i].area+"</option>");			
 			}
 			else{
 				
@@ -64,7 +64,7 @@ $().ready(function() {
 				"<td><input type='text' name='contactList["+contactcount+"].contactFax'></td>" +
 				"<td><input type='text' name='contactList["+contactcount+"].contactEmail'></td>" +
 				"<td><input type='text' name='contactList["+contactcount+"].contactRole'></td>" +
-				"<td  onclick='delTr(this)'><a href='javascript:void()'>删除</a></td></tr>";
+				"<td  onclick='delTr(this)'><a href='javascript:void(0)'>删除</a></td></tr>";
 		$("#addtr").append(str);
 		contactcount++;
 	});
@@ -108,7 +108,7 @@ function checksave(){
 		humane.error("证件号码请输入数字!");
 	
 	*/
-	$.post("/isexitcustomname.action",{"custom.customName":customname},function(result){
+	$.post(path+"agent/customs/isexitcustomname",{"customName":customname},function(result){
 		if(result=="peat"){
 			humane.error("对不起,该客户名称已存在");
 		}else if(result=="nopeat"){

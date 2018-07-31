@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxz.dao.customs.AsCustomsMapper">
+
+	<select id="getAsCustomsCount" resultType="int" parameterType="AsCustoms">
+		select count(1) from as_customs 
+		<where>
+			<if test="customName !=null">customName like concat('%',#{customName},'%')</if>
+		</where>
+	</select>
+	
+	<select id="findAsCustomsList" resultType="AsCustoms" >
+		select *from as_customs
+		<where>
+			<if test="customs.customName !=null">customName like concat('%',#{customs.customName},'%')</if>
+		</where>
+		order by regDatetime desc
+		<if test="pageIndex!=null and pageSize!=null">limit #{pageIndex},#{pageSize}</if>
+	</select>
+	
+	<insert id="addAsCustoms" parameterType="AsCustoms" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO `as_customs`(`agentId`, `agentName`, `customName`, 
+		`customType`, `customTypeName`, `siteUrl`, `customStatus`, `bossName`, 
+		`cardType`, `cardTypeName`, `cardNum`, `companyTel`, `companyFax`, `regDatetime`, 
+		`country`, `province`, `city`, `area`, `companyAddress`, `memo`, `agentCode`) 
+		VALUES (#{agentId}, #{agentName}, #{customName}, 
+		#{customType}, #{customTypeName}, #{siteUrl}, #{customStatus}, #{bossName}, 
+		#{cardType}, #{cardTypeName}, #{cardNum}, #{companyTel}, #{companyFax}, #{regDatetime}, 
+		#{country}, #{province}, #{city}, #{area}, #{companyAddress}, #{memo}, #{agentCode});
+	</insert>
+
+</mapper>

@@ -2,7 +2,7 @@
 $().ready(function() {
 	mover(1);
 	$("#addCustomBtn").click(function(){
-		location.href="/addcustom.action";
+		location.href=path+"agent/customs/addcustom.html";
 	});
 
 	$(".viewCustom").click(function(){
@@ -18,7 +18,6 @@ $().ready(function() {
 	});
 	
 	$(".mofifyCustomStatus").click(function(){
-		
 		var c=$(this);
 		var c_id=c.attr("id");
 		var c_status=c.attr("mStatus");

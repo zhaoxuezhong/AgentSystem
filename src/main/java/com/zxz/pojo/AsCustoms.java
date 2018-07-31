@@ -1,6 +1,7 @@
 package com.zxz.pojo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * AsCustoms entity. @author MyEclipse Persistence Tools
@@ -34,6 +35,7 @@ public class AsCustoms implements java.io.Serializable {
 	private String memo;
 	private String agentCode;
 
+	private List<AsContacts> contactList;
 	// Constructors
 
 	/** default constructor */
@@ -43,6 +45,11 @@ public class AsCustoms implements java.io.Serializable {
 	/** minimal constructor */
 	public AsCustoms(Integer agentId) {
 		this.agentId = agentId;
+	}
+
+	public AsCustoms(String customName) {
+		super();
+		this.customName = customName;
 	}
 
 	/** full constructor */
@@ -249,6 +256,14 @@ public class AsCustoms implements java.io.Serializable {
 
 	public void setAgentCode(String agentCode) {
 		this.agentCode = agentCode;
+	}
+
+	public List<AsContacts> getContactList() {
+		return contactList;
+	}
+
+	public void setContactList(List<AsContacts> contactList) {
+		this.contactList = contactList;
 	}
 
 }

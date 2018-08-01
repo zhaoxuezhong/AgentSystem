@@ -25,6 +25,11 @@ public class AsSystemconfigController extends BaseController{
 	@Resource
 	private AsSystemconfigService asSystemconfigServiceImpl;
 	
+	@RequestMapping(value="")
+	public String systemconfig(Model model){
+		return systemConfigList(1,model);
+	}
+	
 	@RequestMapping(value="list/{configType}")
 	public String systemConfigList(@PathVariable("configType")Integer configType,Model model){
 		List<AsSystemconfig> systemConfigList= asSystemconfigServiceImpl.findAsSystemconfigList(configType,null);

@@ -59,4 +59,26 @@ public class AsCustomsServiceImpl implements AsCustomsService {
 		return asCustomsMapper.getAsCustomsCount(new AsCustoms(customName)) > 0;
 	}
 
+	@Override
+	public boolean updateAsCustoms(AsCustoms customs) {
+		boolean result = asCustomsMapper.updateAsCustoms(customs) > 0;
+		if (result) {
+			List<AsContacts> contactsList = customs.getContactList();
+			if (contactsList != null && contactsList.size() > 0) {
+				for (AsContacts asContacts : contactsList) {
+					contactsMapper.updateAsContacts(asContacts);
+					if (contactsMapper.updateAsContacts(asContacts) < 0) {
+						result = false;
+					}
+				}
+			} 
+		}
+		return result;
+	}
+
+	@Override
+	public AsCustoms findAsCustoms(Integer id) {
+		return asCustomsMapper.findAsCustoms(id);
+	}
+
 }

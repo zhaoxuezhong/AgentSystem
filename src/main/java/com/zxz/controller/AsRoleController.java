@@ -25,6 +25,11 @@ public class AsRoleController extends BaseController{
 	@Resource
 	private AsRolePremissioinService asRolePremissioinServiceImpl;
 	
+	@RequestMapping(value="")
+	public String role(Model model){
+		return list( model);
+	}
+	
 	@RequestMapping(value="rolelist")
 	public String list(Model model){
 		List<AsRole> roleList=asRoleServiceImpl.findAsRoleList(null);

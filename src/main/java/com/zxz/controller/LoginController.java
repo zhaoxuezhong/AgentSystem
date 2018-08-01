@@ -61,6 +61,11 @@ public class LoginController extends BaseController {
 	public String toLogin() {
 		return LOGIN;
 	}
+	
+	@RequestMapping(value="agent")
+	public String agent(Model model,HttpSession session){
+		return main(model, session);
+	}
 
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "agent/main")

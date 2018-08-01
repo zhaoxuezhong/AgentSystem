@@ -14,4 +14,8 @@ public interface AsCustomsMapper {
 	int getAsCustomsCount(AsCustoms customs);
 	
 	int addAsCustoms(AsCustoms customs);
+	
+	int updateAsCustoms(AsCustoms customs);
+	
+	AsCustoms findAsCustoms(Integer id);
 }

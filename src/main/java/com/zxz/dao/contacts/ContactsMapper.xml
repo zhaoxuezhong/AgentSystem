@@ -10,5 +10,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (#{customId}, #{contactName}, #{contactTel}, #{contactFax}, 
 		#{contactEmail}, #{contactRole});
 	</insert>
+	
+	<update id="updateAsContacts" parameterType="AsContacts">
+		UPDATE `as_contacts` 
+		<trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+			<if test="contactName !=null">`contactName` = #{contactName}, </if>
+			<if test="contactTel !=null">`contactTel` = #{contactTel}, </if>
+			<if test="contactFax !=null">`contactFax` = #{contactFax}, </if>
+			<if test="contactEmail !=null">`contactEmail` = #{contactEmail}, </if>
+			<if test="contactRole !=null">`contactRole` = #{contactRole}, </if>
+		</trim>
+	</update>
 
 </mapper>

@@ -34,6 +34,11 @@ public class AsUserController extends BaseController{
 	@Resource
 	private AsRoleService asRoleServiceImpl;
 	
+	@RequestMapping(value="")
+	public String user(Model model){
+		return userList(new AsUser(), model, 1, 6);
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="modifypwd")
 	public String modifypwd(String userName,String userPassword,HttpSession session){

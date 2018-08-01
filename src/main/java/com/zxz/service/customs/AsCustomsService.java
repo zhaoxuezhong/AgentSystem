@@ -13,5 +13,9 @@ public interface AsCustomsService {
 	
 	boolean addAsCustoms(AsCustoms customs);
 	
+	boolean updateAsCustoms(AsCustoms customs);
+	
+	AsCustoms findAsCustoms(Integer id);
+	
 	boolean isExitCustomName(String customName);
 }

@@ -1,6 +1,10 @@
 var contactcount=0;
 $().ready(function() {
 	mover(1);
+	
+	if(error!=null&&error!=""&&error!=undefined){
+		humane.error(error);
+	}
 	//初始化日期	
 	$("#regdate").val(new Date().format("yyyy-MM-dd"));
 //	var date=new Date();	

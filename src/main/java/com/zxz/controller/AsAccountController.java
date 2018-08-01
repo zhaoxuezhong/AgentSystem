@@ -24,6 +24,11 @@ public class AsAccountController extends BaseController{
 	@Resource
 	private AsAccountService asAccountServiceImpl;
 	
+	@RequestMapping(value="")
+	public String account(Model model){
+		return accountdetail( model, 1, 6);
+	}
+	
 	/**
 	 * 查看账户明细
 	 * @param model

@@ -30,6 +30,12 @@ public class AsUser implements java.io.Serializable {
 	public AsUser() {
 	}
 
+	public AsUser(Integer id, String userCode) {
+		super();
+		this.id = id;
+		this.userCode = userCode;
+	}
+
 	public AsUser(String userCode) {
 		super();
 		this.userCode = userCode;

@@ -45,6 +45,7 @@ public class AsCustomsController extends BaseController{
 	public String customlist(AsCustoms customs,Model model,
 			@RequestParam(defaultValue="1")Integer pageIndex,
 			@RequestParam(defaultValue="6")Integer pageSize){
+		customs.setAgentId(this.getCurrentUser().getRoleId()!=1?this.getCurrentUser().getId():null);
 		PageInfo<AsCustoms> customsList=asCustomsServiceImpl.findAsCustomsList(customs, pageIndex, pageSize);
 		model.addAttribute("customsList", customsList);
 		return pages("customlist");

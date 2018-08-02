@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAsCustomsCount" resultType="int" parameterType="AsCustoms">
 		select count(1) from as_customs
 		<where>
+			<if test="agentId !=null">agentId =#{agentId}</if>
 			<if test="customName !=null">customName like concat('%',#{customName},'%')</if>
 		</where>
 	</select>
@@ -14,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findAsCustomsList" resultType="AsCustoms">
 		select *from as_customs
 		<where>
+			<if test="customs.agentId !=null">agentId=#{customs.agentId}</if>
 			<if test="customs.customName !=null">customName like concat('%',#{customs.customName},'%')
 			</if>
 		</where>

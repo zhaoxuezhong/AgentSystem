@@ -10,6 +10,7 @@ import com.zxz.dao.account.AsAccountMapper;
 import com.zxz.dao.accountdetail.AsAccountdetailMapper;
 import com.zxz.pojo.AsAccount;
 import com.zxz.pojo.AsAccountdetail;
+import com.zxz.pojo.condition.AccountCondition;
 import com.zxz.utils.PageInfo;
 
 /**
@@ -45,14 +46,14 @@ public class AsAccountServiceImpl implements AsAccountService {
 	}
 
 	@Override
-	public PageInfo<AsAccountdetail> findAsAccountdetailList(Integer userId,Integer pageIndex,Integer pageSize) {
+	public PageInfo<AsAccountdetail> findAsAccountdetailList(AccountCondition accountCondition,Integer pageIndex,Integer pageSize) {
 		PageInfo<AsAccountdetail> pageInfo=new PageInfo<AsAccountdetail>();
-		Integer totalCount=asAccountdetailMapper.getAsAccountdetailCount(userId);
+		Integer totalCount=asAccountdetailMapper.getAsAccountdetailCount(accountCondition);
 		if(totalCount!=null&&totalCount!=0){
 			pageInfo.setTotalCount(totalCount);
 			pageInfo.setPageSize(pageSize);
 			pageInfo.setPageIndex(pageIndex);
-			pageInfo.setList(asAccountdetailMapper.findAsAccountdetailList(userId, 
+			pageInfo.setList(asAccountdetailMapper.findAsAccountdetailList(accountCondition, 
 					(pageInfo.getPageIndex()-1)*pageInfo.getPageSize(), pageInfo.getPageSize()));
 		}
 		return pageInfo;

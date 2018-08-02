@@ -3,66 +3,31 @@
 <jsp:include page="inc/head.jsp"></jsp:include>
 <div class="mbxnav">
 	<!-- 导航 -->
-	<a href="/main.action">代理商管理</a>\ <a href="/mylogs.action">查看操作日志</a>
+	<a href="agent/main">代理商管理</a>\ <a href="javaScript:void(0)">查看操作日志</a>
 </div>
 <div class="container">
-		
-
 			<table>
 				<tr>
 					<td>登录账户</td>
 					<td>操作信息</td>
 					<td>操作时间</td>
 				</tr>
-
-				<%--<s:iterator value="logsList">
+				<c:forEach items="${logsList.list}" var="log">
 					<tr>
-						<td><s:property value="userName" /></td>
-						<td><s:property value="operateInfo" /></td>
-						<td><s:date name="operateDatetime"  format="yyyy-MM-dd"/></td>
-					</tr>
-				</s:iterator>
-			--%>
-				<s:iterator value="pager.items">
-					<tr>
-						<td><s:property value="userName" />
+						<td>${log.userName}
 						</td>
-						<td><s:property value="operateInfo" />
+						<td>${log.operateInfo}
 						</td>
-						<td><s:date name="operateDatetime" format="yyyy-MM-dd HH:mm:ss" />
+						<td>${log.operateDatetime}
 						</td>
 					</tr>
-				</s:iterator>
+				</c:forEach>
 			</table>
-
-			<div class="pagination pagination-centered">
-				<ul>
-					<li><a
-						href="/mylogs.action?pager.page=1">首页</a>
-					</li>
-					<s:if test="pager.prevPages!=null">
-						<s:iterator value="pager.prevPages"  var="num">
-							<li><a href="/mylogs.action?pager.page=<s:property value="#num"/>"><s:property value="#num"/></a></li>
-						</s:iterator>
-					</s:if>
-					<li class="active">
-						<a href="#"><s:property value="pager.page"/></a>
-					</li>
-					<s:if test="pager.nextPages!=null">
-						<s:iterator value="pager.nextPages" var="num">
-							<li><a href="/mylogs.action?pager.page=<s:property value="#num"/>"><s:property value="#num"/></a></li>
-						
-						</s:iterator>
-					</s:if>
-					<li><a 					
-					href="/mylogs.action?pager.page=<s:property value="pager.pageCount"/>">尾页</a>
-					</li>
-				</ul>
-			</div>
+<c:set value="${logsList}" var="pager"></c:set>
+		<%@ include file="inc/pagination.jsp" %>
+		
 		</div>
-	</div>
-	<link rel="stylesheet" href="/css/logs.css" />
-	<script type="text/javascript" src="/js/logs.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/logs.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/logs.js"></script>
 </body>
 </html>
-<s:debug></s:debug>

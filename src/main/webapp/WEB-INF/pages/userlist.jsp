@@ -128,9 +128,9 @@
 						roleid='${user.roleId}' class="deleteUser">
 							删除</span> | 
 							<span><a
-							href="javascript:ymPrompt.win('/yfklist.action?id=${user.id}&userCode=${user.userCode}',1000,500,'预付款',null,null,null,true)">预付款</a></span> | 
+							href="javascript:ymPrompt.win('agent/account/yfklist?id=${user.id}&userCode=${user.userCode}',1000,500,'预付款',null,null,null,true)">预付款</a></span> | 
 							<span><a
-							href="javascript:ymPrompt.win('/loglist.action?id=${user.id}&userCode=${user.userCode}',1000,500,'LOG日志',null,null,null,true)">LOG日志</a>
+							href="javascript:ymPrompt.win('agent/log/loglist?id=${user.id}&userName=${user.userCode}',1000,500,'LOG日志',null,null,null,true)">LOG日志</a>
 					</span></td>
 				</tr>
 			</c:forEach>
@@ -138,30 +138,6 @@
 	</table>
 	<c:set value="${userList}" var="pager"></c:set>
 	<%@ include file="inc/pagination.jsp" %>
-	<%-- <div class="pagination pagination-centered">
-				<ul>
-					<li><a
-						href="/userlist.action?pager.page=1&uname=<s:property value="uname" />&user.roleId=<s:property value="user.roleId" />&user.isStart=<s:property value="user.isStart"/>">首页</a>
-					</li>
-					<s:if test="pager.prevPages!=null">
-						<s:iterator value="pager.prevPages"  var="num">
-							<li><a href="/userlist.action?pager.page=<s:property value="#num"/>&uname=<s:property value="uname" />&user.roleId=<s:property value="user.roleId" />&user.isStart=<s:property value="user.isStart"/>"><s:property value="#num"/></a></li>
-						</s:iterator>
-					</s:if>
-					<li class="active">
-						<a href="#"><s:property value="pager.page"/></a>
-					</li>
-					<s:if test="pager.nextPages!=null">
-						<s:iterator value="pager.nextPages" var="num">
-							<li><a href="/userlist.action?pager.page=<s:property value="#num"/>&uname=<s:property value="uname" />&user.roleId=<s:property value="user.roleId" />&user.isStart=<s:property value="user.isStart"/>"><s:property value="#num"/></a></li>
-						
-						</s:iterator>
-					</s:if>
-					<li><a 					
-					href="/userlist.action?pager.page=<s:property value="pager.pageCount"/>&uname=<s:property value="uname" />&user.roleId=<s:property value="user.roleId" />&user.isStart=<s:property value="user.isStart"/>">尾页</a>
-					</li>
-				</ul>
-			</div> --%>
 </div>
 <jsp:include page="inc/foot.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/userlist.css">

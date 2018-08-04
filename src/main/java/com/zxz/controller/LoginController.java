@@ -71,7 +71,6 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "agent/main")
 	public String main(Model model,HttpSession session) {
 		String key="role"+this.getCurrentUser().getRoleId();
-		redisAPI.del(key);
 		if(!redisAPI.exist(key)){
 			List<Map<String, Object>> menuList=asRolePremissioinServiceImpl.findMenu(this.getCurrentUser().getRoleId());
 			if(null != menuList){
@@ -85,7 +84,7 @@ public class LoginController extends BaseController {
 		}
 		
 		AsAccount account=asAccountServiceImpl.findAsAccountByUserId(this.getCurrentUser().getId());
-		model.addAttribute("account", account);
+		session.setAttribute("account", account);
 		return MAIN;
 	}
 

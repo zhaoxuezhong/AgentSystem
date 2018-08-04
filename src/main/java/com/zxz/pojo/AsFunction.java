@@ -20,6 +20,7 @@ public class AsFunction implements java.io.Serializable {
 	private String funcUrl;
 	private Integer isStart;
 	private Integer parentId;
+	private Integer checked =0;
 
 	// Constructors
 
@@ -120,6 +121,14 @@ public class AsFunction implements java.io.Serializable {
 
 	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
+	}
+
+	public Integer getChecked() {
+		return checked;
+	}
+
+	public void setChecked(Integer checked) {
+		this.checked = checked;
 	}
 
 }

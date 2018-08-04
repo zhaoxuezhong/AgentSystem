@@ -3,6 +3,7 @@ package com.zxz.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import com.zxz.pojo.AsSystemconfig;
 import com.zxz.pojo.condition.AccountCondition;
 import com.zxz.service.account.AsAccountService;
 import com.zxz.service.systemconfig.AsSystemconfigService;
+import com.zxz.utils.Constants;
 import com.zxz.utils.PageInfo;
 
 /**
@@ -59,9 +61,10 @@ public class AsAccountController extends BaseController{
 	 */
 	@RequestMapping(value="opeaccount")
 	@ResponseBody
-	public String opeaccount(String account){
+	public String opeaccount(String account,HttpSession session){
 		AsAccount asAccount=JSONObject.parseObject(account, AsAccount.class);
 		boolean result=asAccountServiceImpl.updateAsAccount(asAccount);
+		session.setAttribute("account", asAccountServiceImpl.findAsAccountByUserId(this.getCurrentUser().getId()));
 		return result?"success":"false";
 	}
 	
@@ -80,7 +83,7 @@ public class AsAccountController extends BaseController{
 				.findAsAccountdetailList(accountCondition, pageIndex, pageSize);
 		model.addAttribute("accountCondition", accountCondition);
 		model.addAttribute("accountdetailList", accountdetailList);
-		List<AsSystemconfig> accountConfigList= asSystemconfigServiceImpl.findAsSystemconfigList(1, 1);
+		List<AsSystemconfig> accountConfigList= asSystemconfigServiceImpl.findAsSystemconfigList(Constants.FINANCE_TYPE, 1);
 		model.addAttribute("accountConfigList", accountConfigList);
 		return pages("yfklist");
 	}

@@ -1,15 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="inc/head.jsp"></jsp:include>
 <div class="container">
 	<h3>功能列表</h3>
 	<!-- 操作按钮 -->
 	<div class="btndiv">
-		<input type="hidden" id="roleid" value="<s:property value="roleId"/>">
+		<input type="hidden" id="roleid" value="${roleId}">
 		<input id="saverolefunc" type="button" value="保存" /> <input
-			id="cancel" type="button" value="取消" />
+			id="huanyuan" type="button" value="还原" />
 	</div>
-
 	<!-- 功能表格 -->
 	<table>
 		<thead>
@@ -23,32 +21,34 @@
 			</tr>
 		</thead>
 		<tbody>
-			<s:iterator value="funcList">
-
-				<tr>
-					<td><s:if test="check">
-							<input type="checkbox" class="cb" checked="checked"
-								value="<s:property value="id"/>">
-						</s:if> <s:else>
-							<input type="checkbox" class="cb"
-								value="<s:property value="id"/>">
-						</s:else></td>
-					<td><s:property value="functionName" />
+			<c:forEach items="${funclist}" var="fc">
+				 <tr>
+					<td>
+						<input type="checkbox" class="cb ${fc.checked==1?'huanyuan':'' }" ${fc.checked==1?'checked':'' } 
+						 value="${fc.id}">
 					</td>
-					<td><s:property value="functionUrl" />
+					<td>${fc.functionName}
 					</td>
-					<td><s:date name="creationTime" format="yyyy-MM-dd HH:mm:ss" />
+					<td>${fc.funcUrl}
 					</td>
-					<td><s:if test="isStart==1">启用</s:if>
-						<s:else>停用</s:else></td>
+					<td>${fc.creationTime}
+					</td>
+					<td>${fc.isStart==1?'启用':'停用'}
 				</tr>
-
-			</s:iterator>
-
+				 
+			</c:forEach>
 		</tbody>
 	</table>
 </div>
-<link rel="stylesheet" type="text/css" href="/css/functionlist.css">
-<script type="text/javascript" src="/js/functionlist.js"></script>
+<script>
+	var path="${pageContext.request.contextPath}/";
+</script>
+<!-- humane提醒库 -->
+<link id='theme' rel='stylesheet' href='${pageContext.request.contextPath}/statics/humane/themes/original.css' />
+<script src='${pageContext.request.contextPath}/statics/humane/humane.js'></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/public.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/functionlist.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/functionlist.js"></script>
 </body>
 </html>

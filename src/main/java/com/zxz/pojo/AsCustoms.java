@@ -50,6 +50,12 @@ public class AsCustoms implements java.io.Serializable {
 		this.agentId = agentId;
 	}
 
+	public AsCustoms(Integer agentId, String customName) {
+		super();
+		this.agentId = agentId;
+		this.customName = customName;
+	}
+
 	public AsCustoms(String customName) {
 		super();
 		this.customName = customName;

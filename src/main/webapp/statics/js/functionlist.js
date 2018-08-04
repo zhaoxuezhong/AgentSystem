@@ -20,8 +20,8 @@ $().ready(function(){
 			if(cblist[i].checked)
 				checkList+=cblist[i].value + ",";
 		}
-		
-		$.post("/saverolefunc.action",{'roleId':roleId,'checkList':checkList},
+		checkList=checkList.substr(0, checkList.length-1);
+		$.post(path+"agent/role/saverolefunc",{'roleId':roleId,'checkList':checkList},
 				function(result){
 				if(result=="success")
 					humane.success("保存成功");
@@ -29,5 +29,19 @@ $().ready(function(){
 					humane.success("保存失败");
 		},"html");
 		
+	});
+	
+	$("#huanyuan").click(function(){
+		var cblist=$(".cb");
+		for(var i=0;i<cblist.length;i++)
+		{
+			cblist[i].checked=false;
+		}
+		$("#cball")[0].checked=false;
+		var huanyuan=$(".huanyuan");
+		for(var i=0;i<huanyuan.length;i++)
+		{
+			huanyuan[i].checked=true;
+		}
 	});
 });

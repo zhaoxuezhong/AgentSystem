@@ -20,6 +20,7 @@ import com.zxz.pojo.HatProvince;
 import com.zxz.service.address.AddressService;
 import com.zxz.service.customs.AsCustomsService;
 import com.zxz.service.systemconfig.AsSystemconfigService;
+import com.zxz.utils.Constants;
 import com.zxz.utils.PageInfo;
 
 /**
@@ -56,10 +57,10 @@ public class AsCustomsController extends BaseController{
 		List<HatProvince> provinceList=addressServiceImpl.findHatProvinceList(null);
 		model.addAttribute("provinceList", provinceList);
 		//企业类型
-		List<AsSystemconfig> customTypeList=asSystemconfigServiceImpl.findAsSystemconfigList(5, 1);
+		List<AsSystemconfig> customTypeList=asSystemconfigServiceImpl.findAsSystemconfigList(Constants.CUSTOMER_TYPE, 1);
 		model.addAttribute("customTypeList", customTypeList);
 		//证件类型
-		List<AsSystemconfig> cardTypeList=asSystemconfigServiceImpl.findAsSystemconfigList(6, 1);
+		List<AsSystemconfig> cardTypeList=asSystemconfigServiceImpl.findAsSystemconfigList(Constants.CERTIFICATE_TYPE, 1);
 		model.addAttribute("cardTypeList", cardTypeList);
 		return pages("addcustom");
 	}
@@ -84,7 +85,7 @@ public class AsCustomsController extends BaseController{
 		asCustoms.setAgentId(loginUser.getId());
 		asCustoms.setAgentCode(loginUser.getUserCode());
 		asCustoms.setAgentName(loginUser.getUserName());
-		if(!asCustomsServiceImpl.addAsCustoms(asCustoms)){
+		if(asCustomsServiceImpl.addAsCustoms(asCustoms)){
 			return "redirect:customlist";
 		}
 		model.addAttribute("custom", asCustoms);
@@ -125,5 +126,14 @@ public class AsCustomsController extends BaseController{
 	@ResponseBody
 	public String modifycustomstatus(Integer id,Integer customStatus){
 		return asCustomsServiceImpl.updateAsCustoms(new AsCustoms(id,customStatus))?"success":"false";
+	}
+	
+	@RequestMapping(value="searchcustom")
+	public String searchcustom(String customName,Model model){
+		AsCustoms custom=new AsCustoms(this.getCurrentUser().getRoleId()!=1?this.getCurrentUser().getId():null
+				,customName);
+		PageInfo<AsCustoms> customList=asCustomsServiceImpl.findAsCustomsList(custom, null, null);
+		model.addAttribute("customList", customList.getList());
+		return "searchcustom";
 	}
 }

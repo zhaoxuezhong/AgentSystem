@@ -5,13 +5,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.zxz.dao.function.AsRolePremissionMapper">
 
 	<select id="findRoleFunctionList" resultType="AsFunction">
-		select af.* from as_role_premission  arp
-		RIGHT JOIN as_function af on arp.functionId =af.id
+		select af.* from as_role_premission arp
+		RIGHT JOIN as_function af on
+		arp.functionId =af.id
 		<where>
 			<if test="parentId !=null">af.parentId=#{parentId}</if>
 			<if test="roleId !=null"> and arp.roleId=#{roleId}</if>
-		</where>  
-		
+		</where>
+	</select>
+
+	<select id="findFunctionByRoleId" resultType="AsFunction" parameterType="int">
+		select af.*,
+		(select count(arp.id) checked from as_role_premission arp 
+		where arp.functionId=af.id and arp.roleId=#{roleId}) checked from
+		as_function af where parentId !=0 ORDER BY id		
 	</select>
 	
+	<select id="getRoleFunctionCount" resultType="string" parameterType="int"> 
+		select functionId from as_role_premission where roleId=#{roleId}
+	</select>
+	
+	<insert id="addRoleFunction" parameterType="AsRolePremission">
+		INSERT INTO `as_role_premission`(`roleId`, `functionId`, `creationTime`, `createdBy`, `isStart`) 
+		VALUES (#{roleId}, #{functionId}, #{creationTime},#{createdBy}, #{isStart});
+	</insert>
+	
+	<delete id="deleteRoleFunction">
+		delete from as_role_premission where roleId=#{roleId} and functionId=#{functionId}
+	</delete>
+
 </mapper>

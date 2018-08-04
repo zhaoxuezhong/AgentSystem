@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.zxz.pojo.AsSystemconfig;
 import com.zxz.service.systemconfig.AsSystemconfigService;
+import com.zxz.utils.Constants;
 
 /**
  * @author zhaoxuezhong
@@ -27,7 +28,7 @@ public class AsSystemconfigController extends BaseController{
 	
 	@RequestMapping(value="")
 	public String systemconfig(Model model){
-		return systemConfigList(1,model);
+		return systemConfigList(Constants.FINANCE_TYPE,model);
 	}
 	
 	@RequestMapping(value="list/{configType}")
@@ -62,7 +63,7 @@ public class AsSystemconfigController extends BaseController{
 	
 	@RequestMapping(value="caiwu")
 	public String caiwu(Model model){
-		List<AsSystemconfig> accountConfigList=asSystemconfigServiceImpl.findAsSystemconfigList(1, 1);
+		List<AsSystemconfig> accountConfigList=asSystemconfigServiceImpl.findAsSystemconfigList(Constants.FINANCE_TYPE, 1);
 		model.addAttribute("accountConfigList", accountConfigList);
 		return pages("caiwu");
 	}

@@ -11,7 +11,7 @@
 			<label>客户名称:</label>
 			<input type="text" id="cname" name="customName" value="${asCustoms.customName}">
 			<input type="submit" value="查询"/>
-			
+			<input  type="hidden" name="pageIndex" value="1"/>
 		</div>
 	</form>
 

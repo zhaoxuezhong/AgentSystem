@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(1) from as_customs
 		<where>
 			<if test="agentId !=null">agentId =#{agentId}</if>
-			<if test="customName !=null">customName like concat('%',#{customName},'%')</if>
+			<if test="customName !=null">and customName like concat('%',#{customName},'%')</if>
 		</where>
 	</select>
 
@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *from as_customs
 		<where>
 			<if test="customs.agentId !=null">agentId=#{customs.agentId}</if>
-			<if test="customs.customName !=null">customName like concat('%',#{customs.customName},'%')
+			<if test="customs.customName !=null">and customName like concat('%',#{customs.customName},'%')
 			</if>
 		</where>
 		order by regDatetime desc

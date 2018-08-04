@@ -35,6 +35,7 @@
 						操作时间: <input class="Wdate" onClick="WdatePicker()" size="15" readonly type="text" name="operateDatetime"
 						value='<fmt:formatDate value="${asLogs.operateDatetime}" pattern="yyyy-MM-dd"/>'>
 						<input type="submit" value="查询">
+						<input  type="hidden" name="pageIndex" value="1"/>
 					</form>
 				</li>
 			</ul>

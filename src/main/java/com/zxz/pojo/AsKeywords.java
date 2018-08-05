@@ -44,10 +44,21 @@ public class AsKeywords implements java.io.Serializable {
 	public AsKeywords() {
 	}
 
-	public AsKeywords(String keywords) {
+
+	public AsKeywords(Timestamp regDatetime, Timestamp regPassDatetime) {
+		super();
+		this.regDatetime = regDatetime;
+		this.regPassDatetime = regPassDatetime;
+	}
+
+
+	public AsKeywords(String keywords, Integer isUse) {
 		super();
 		this.keywords = keywords;
+		this.isUse = isUse;
 	}
+
+
 
 	/** minimal constructor */
 	public AsKeywords(String keywords, Integer agentId, String agentName, Integer customId, String customName,

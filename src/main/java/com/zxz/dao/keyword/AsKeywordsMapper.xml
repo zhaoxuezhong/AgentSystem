@@ -11,12 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="findAsKeywordsList" resultType="AsKeywords">
-		select *from as_keywords 
-		<where>
+	select
+	ay.configTypeName serviceName,ak.*
+	from as_keywords ak
+	join as_systemconfig ay on ak.productType=ay.configTypeValue
+	where ay.configType=2
 			<if test="keyword.agentId !=null">and agentId=#{keyword.agentId}</if>
 			<if test="keyword.keywords !=null">and keywords like concat('%',#{keyword.keywords},'%')</if>
-		</where>
-		ORDER BY preRegDatetime desc,preRegPassDatetime 
+			<if test="keyword.regDatetime !=null">and ak.regDatetime &gt; #{keyword.regDatetime}</if>
+			<if test="keyword.regPassDatetime !=null">and ak.regPassDatetime &lt; #{kewyord.regPassDatetime}</if>
+		ORDER BY regDatetime desc,regPassDatetime 
 		limit #{pageIndex},#{pageSize}
 	</select>
 	
@@ -25,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<if test="agentId !=null">and agentId=#{agentId}</if>
 			<if test="keywords !=null">and keywords like concat('%',#{keywords},'%')</if>
+			<if test="isUse !=null">and isUse =#{isUse}</if>
 		</where>
 	</select>
 

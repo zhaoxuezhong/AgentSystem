@@ -4,8 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zxz.dao.account.AsAccountMapper">
 
-	<select id="findAsAccountByUserId" resultType="AsAccount" parameterType="AsAccount">
-		select * from as_account where userId=#{userId}
+	<select id="findAsAccountByUserId" resultType="AsAccount"
+		parameterType="int">
+		select aa.*,au.userName userName from as_account aa join as_user au on
+		aa.userId=au.id
+		<where>
+			<if test="userId !=null">userId=#{userId}</if>
+		</where>
 	</select>
 
 	<update id="updateAsAccount" parameterType="AsAccount">
@@ -15,9 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="moneyBak != null ">`moneyBak` = #{moneyBak}, </if>
 		</trim>
 	</update>
-	
+
 	<insert id="addAsAccount" parameterType="AsAccount">
-		INSERT INTO `as_account`(`userId`, `money`, `moneyBak`) 
+		INSERT INTO
+		`as_account`(`userId`, `money`, `moneyBak`)
 		VALUES (#{userId},#{money},#{moneyBak});
 	</insert>
 

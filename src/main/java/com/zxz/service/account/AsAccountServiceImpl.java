@@ -1,6 +1,7 @@
 package com.zxz.service.account;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -26,7 +27,8 @@ public class AsAccountServiceImpl implements AsAccountService {
 	
 	@Override
 	public AsAccount findAsAccountByUserId(Integer userId) {
-		return asAccountMapper.findAsAccountByUserId(userId);
+		List<AsAccount> list= asAccountMapper.findAsAccountByUserId(userId);
+		return list!=null&&list.size()>0?list.get(0):null;
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class AsAccountServiceImpl implements AsAccountService {
 		accountDetail.setDetailDateTime(new Timestamp(System.currentTimeMillis()));
 		accountDetail.setUserId(account.getUserId());
 		accountDetail.setMoney(account.getMoney());
-		AsAccount reAccount=asAccountMapper.findAsAccountByUserId(account.getUserId());
+		AsAccount reAccount=findAsAccountByUserId(account.getUserId());
 		//余额
 		Double money=reAccount.getMoney()+account.getMoney();
 		accountDetail.setAccountMoney(money);
@@ -62,6 +64,11 @@ public class AsAccountServiceImpl implements AsAccountService {
 	@Override
 	public boolean addAsAccount(AsAccount account) {
 		return asAccountMapper.addAsAccount(account)>0;
+	}
+
+	@Override
+	public List<AsAccount> findAllAsAccount() {
+		return asAccountMapper.findAsAccountByUserId(null);
 	}
 
 }

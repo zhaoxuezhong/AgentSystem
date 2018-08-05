@@ -1,6 +1,8 @@
 package com.zxz.service.account;
 
 
+import java.util.List;
+
 import com.zxz.pojo.AsAccount;
 import com.zxz.pojo.AsAccountdetail;
 import com.zxz.pojo.condition.AccountCondition;
@@ -18,5 +20,7 @@ public interface AsAccountService {
 	boolean updateAsAccount(AsAccount account);
 	
 	boolean addAsAccount(AsAccount account);
+	
+	List<AsAccount> findAllAsAccount();
 	
 }

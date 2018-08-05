@@ -121,6 +121,9 @@ public class AsKeywordsController extends BaseController {
 	        keyword.setRegPassDatetime(new Timestamp(calendar.getTimeInMillis()));
 	        keyword.setIsPass(0);
 		}
+		if(keyword!=null&& keyword.getCheckStatus()!=null&& keyword.getCheckStatus()==3){
+			keyword.setIsUse(0);
+		}
 		return asKeywordsServiceImpl.updateAsKeywords(keyword)?"success":"false";
 	}
 	

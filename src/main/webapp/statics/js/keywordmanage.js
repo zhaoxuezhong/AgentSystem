@@ -28,7 +28,7 @@ $().ready(function(){
 		var kid=obj.attr("kid");
 		var keyword=obj.attr("keyword");
 		ymPrompt.win({
-			message:path+"agent/keyword/xufei?id="+kid,
+			message:path+"agent/keyword/xufei/"+kid,
 			width:600,
 			height:400,
 			title:'当前为['+keyword+']进行续费操作',

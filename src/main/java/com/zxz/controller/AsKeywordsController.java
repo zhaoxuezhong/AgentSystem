@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -144,6 +145,22 @@ public class AsKeywordsController extends BaseController {
 		keywords.setAppPassword(asKeywords.getAppPassword());
 		model.addAttribute("keywords", keywords);
 		return pages("openapp");
+	}
+	
+	@RequestMapping(value="xufei/{id}")
+	public String xufei(@PathVariable("id")Integer id,Model model){
+		List<AsSystemconfig> serviceTypeList=asSystemconfigServiceImpl
+				.findAsSystemconfigList(Constants.SERVICE_TYPE, 1);
+		model.addAttribute("serviceTypeList", serviceTypeList);
+		AsKeywords keywords=asKeywordsServiceImpl.findAsKeywords(id);
+		model.addAttribute("keywords", keywords);
+		return pages("xufei");
+	}
+	
+	@RequestMapping(value="keywordsxufei")
+	public String keywordsxufei(String keywords){
+		AsKeywords keyword=JSONObject.parseObject(keywords, AsKeywords.class);
+		return asKeywordsServiceImpl.updateXufeiAsKeywords(keyword)?"success":"exception";
 	}
 	
 }

@@ -18,4 +18,6 @@ public interface AsKeywordsService {
 	AsKeywords findAsKeywords(Integer id);
 	
 	PageInfo<AsKeywords> findAsKeywordsList(AsKeywords keyword,Integer pageIndex,Integer pageSize);
+
+	boolean updateXufeiAsKeywords(AsKeywords keyword);
 }

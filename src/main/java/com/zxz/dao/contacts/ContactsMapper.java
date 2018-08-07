@@ -10,4 +10,6 @@ public interface ContactsMapper {
 	
 	int addAsContacts(AsContacts contacts);
 	
+	int updateAsContacts(AsContacts contacts);
+	
 }

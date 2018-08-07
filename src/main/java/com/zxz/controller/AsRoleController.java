@@ -1,8 +1,8 @@
 package com.zxz.controller;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,6 @@ import com.zxz.pojo.AsFunction;
 import com.zxz.pojo.AsRole;
 import com.zxz.service.function.AsRolePremissioinService;
 import com.zxz.service.role.AsRoleService;
-
 @Controller
 @RequestMapping(value="agent/role")
 public class AsRoleController extends BaseController{
@@ -24,6 +23,11 @@ public class AsRoleController extends BaseController{
 	private AsRoleService asRoleServiceImpl;
 	@Resource
 	private AsRolePremissioinService asRolePremissioinServiceImpl;
+	
+	@RequestMapping(value="")
+	public String role(Model model){
+		return list( model);
+	}
 	
 	@RequestMapping(value="rolelist")
 	public String list(Model model){
@@ -64,9 +68,22 @@ public class AsRoleController extends BaseController{
 	
 	@RequestMapping(value="funclist")
 	public String funclist(Integer roleId,Model model){
-		List<AsFunction> funclist= asRolePremissioinServiceImpl.findAsFunctionList(roleId);
-		model.addAttribute("funclist", funclist);
-		return "funclist";
+		List<AsFunction> functionList=asRolePremissioinServiceImpl.findFunctionByRoleId(roleId);
+		model.addAttribute("funclist", functionList);
+		model.addAttribute("roleId", roleId);
+		return pages("functionlist");
+	}
+	
+	@RequestMapping(value="saverolefunc")
+	@ResponseBody
+	public String saverolefunc(Integer roleId,String checkList){
+		List<String> functionIdList=Arrays.asList(checkList.split(","));
+		try {
+			return asRolePremissioinServiceImpl.updateRoleFunction(functionIdList, roleId)?"success":"false";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
 	}
 	
 }

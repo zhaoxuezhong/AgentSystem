@@ -2,6 +2,8 @@ package com.zxz.pojo;
 
 import java.sql.Timestamp;
 
+import com.zxz.utils.MD5;
+
 /**
  * AsUser entity. @author MyEclipse Persistence Tools
  */
@@ -28,6 +30,12 @@ public class AsUser implements java.io.Serializable {
 
 	/** default constructor */
 	public AsUser() {
+	}
+
+	public AsUser(Integer id, String userCode) {
+		super();
+		this.id = id;
+		this.userCode = userCode;
 	}
 
 	public AsUser(String userCode) {
@@ -93,7 +101,7 @@ public class AsUser implements java.io.Serializable {
 	}
 
 	public String getUserPassword() {
-		return this.userPassword;
+		return MD5.MD5Encode(this.userPassword);
 	}
 
 	public void setUserPassword(String userPassword) {

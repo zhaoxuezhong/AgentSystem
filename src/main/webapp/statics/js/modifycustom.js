@@ -2,8 +2,10 @@ var contactcount=0;
 $().ready(function() {
 	mover(1);
 	contactcount=$("#contactcount").val();
-	//初始化日期	
-	$("#regdate").val(new Date().format("yyyy-MM-dd"));
+	
+	if(error!=null&&error!=""&&error!=undefined){
+		humane.error(error);
+	}
 	
 	$("#customprovince").change(function(){
 		//初始化
@@ -14,11 +16,11 @@ $().ready(function() {
 		
 		var s_province=$("#customprovince").val();
 		//ajax请求,按省份获取相应城市列表
-		$.post("/loadcity.action",{"province.provinceID":s_province},function(result){
+		$.post(path+"agent/customs/loadcity.json",{"provinceId":s_province},function(result){
 			//result cityList
 			if(result!=""){
-				for(var i=0;i<result.length;i++)
-					$("#customcity").append("<option value='"+result[i].cityID+"'>"+result[i].city+"</option>");			
+				for(var i=0;i<result.cityList.length;i++)
+					$("#customcity").append("<option value='"+result.cityList[i].cityId+"'>"+result.cityList[i].city+"</option>");			
 			}
 			else{
 				
@@ -28,16 +30,17 @@ $().ready(function() {
 		
 	});
 	
+	
 	var province=$("#customprovince").val();
 	var city=$("#city").val();
 	var area=$("#area").val();
 	if(province!=""&&city!=""){
 		
-		$.post("/loadcity.action",{"province.provinceID":province},function(result){
+		$.post(path+"agent/customs/loadcity.json",{"provinceId":province},function(result){
 			//result cityList
 			if(result!=""){
-				for(var i=0;i<result.length;i++)
-					$("#customcity").append("<option value='"+result[i].cityID+"'>"+result[i].city+"</option>");				
+				for(var i=0;i<result.cityList.length;i++)
+					$("#customcity").append("<option value='"+result.cityList[i].cityId+"'>"+result.cityList[i].city+"</option>");				
 				$("#customcity").val(city);//回显
 			}
 			else{
@@ -49,11 +52,11 @@ $().ready(function() {
 	
 	if(province!=""&&city!=""&&area!="")
 	{		
-		$.post("/loadarea.action",{"city.cityID":city},function(result){
+		$.post(path+"agent/customs/loadarea.json",{"cityId":city},function(result){
 			//result areaList
 			if(result!=""){
-				for(var i=0;i<result.length;i++)
-					$("#customarea").append("<option value='"+result[i].areaID+"'>"+result[i].area+"</option>");
+				for(var i=0;i<result.areaList.length;i++)
+					$("#customarea").append("<option value='"+result.areaList[i].areaId+"'>"+result.areaList[i].area+"</option>");
 				$("#customarea").val(area);//区域回显
 			}
 			else{
@@ -69,11 +72,11 @@ $().ready(function() {
 		$("#customarea").append("<option value='' selected='selected'>--请选择--</option>");		
 		var s_city=$("#customcity").val();
 		//ajax请求,按城市获取相应的区
-		$.post("/loadarea.action",{"city.cityID":s_city},function(result){
+		$.post(path+"agent/customs/loadarea.json",{"cityId":s_city},function(result){
 			//result areaList
 			if(result!=""){
-				for(var i=0;i<result.length;i++)
-					$("#customarea").append("<option value='"+result[i].areaID+"'>"+result[i].area+"</option>");			
+				for(var i=0;i<result.areaList.length;i++)
+					$("#customarea").append("<option value='"+result.areaList[i].areaId+"'>"+result.areaList[i].area+"</option>");			
 			}
 			else{
 				

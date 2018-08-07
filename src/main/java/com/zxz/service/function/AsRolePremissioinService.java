@@ -14,4 +14,8 @@ public interface AsRolePremissioinService {
 	List<Map<String, Object>> findMenu(Integer roleId);
 	
 	List<AsFunction> findAsFunctionList(Integer roleId);
+	
+	List<AsFunction> findFunctionByRoleId(Integer roleId);
+	
+	boolean updateRoleFunction(List<String> functionIdList,Integer roleId) throws Exception;
 }

@@ -11,7 +11,7 @@
 				<c:forEach items="${roleList}" var="role">
 					<li>
 						<div id="sidebar">
-							<a target="funclist" href="agent/role/funclist.xml?roleId=${role.id}">${role.roleName}</a>
+							<a target="funclist" href="agent/role/funclist?roleId=${role.id}">${role.roleName}</a>
 						</div>
 					</li>
 				</c:forEach>

@@ -1,4 +1,8 @@
 $().ready(function(){
+	if(window.top !== window.self){ //若自身窗口不等于顶层窗口
+	    window.top.location.href = window.self.location.href; //顶层窗口跳转到自身窗口
+	}
+	
 	mover(1);
 	//开通app
 	$(".openapp").click(function(){
@@ -9,7 +13,7 @@ $().ready(function(){
 		//json方式传参数  JSON.parse(jsonStr)  =>  javascriptobjct
 		//注意与普通传参方式的区别
 		ymPrompt.win({
-			message:"/openapp.action?keywords.id="+kid,
+			message:path+"agent/keyword/openapp?id="+kid,
 			width:600,
 			height:400,
 			title:'开通['+keyword+']app',
@@ -24,7 +28,7 @@ $().ready(function(){
 		var kid=obj.attr("kid");
 		var keyword=obj.attr("keyword");
 		ymPrompt.win({
-			message:"/xufei.action?keywords.id="+kid,
+			message:path+"agent/keyword/xufei/"+kid,
 			width:600,
 			height:400,
 			title:'当前为['+keyword+']进行续费操作',

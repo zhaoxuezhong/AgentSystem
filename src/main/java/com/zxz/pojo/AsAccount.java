@@ -62,20 +62,20 @@ public class AsAccount implements java.io.Serializable {
 		this.moneyBak = moneyBak;
 	}
 
-	public AsAccountdetail getAccountDetail() {
-		return accountDetail;
-	}
-
-	public void setAccountDetail(AsAccountdetail accountDetail) {
-		this.accountDetail = accountDetail;
-	}
-
 	public String getUserName() {
 		return userName;
 	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public AsAccountdetail getAccountDetail() {
+		return accountDetail;
+	}
+
+	public void setAccountDetail(AsAccountdetail accountDetail) {
+		this.accountDetail = accountDetail;
 	}
 
 }

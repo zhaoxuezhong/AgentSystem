@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.zxz.pojo.AsAccountdetail;
+import com.zxz.pojo.condition.AccountCondition;
 
 /**
  * @author zhaoxuezhong
@@ -12,9 +13,9 @@ import com.zxz.pojo.AsAccountdetail;
  */
 public interface AsAccountdetailMapper {
 	
-	int getAsAccountdetailCount(Integer userId);
+	int getAsAccountdetailCount(AccountCondition accountCondition);
 	
-	List<AsAccountdetail> findAsAccountdetailList(@Param("userId")Integer userId,
+	List<AsAccountdetail> findAsAccountdetailList(@Param("accountCondition")AccountCondition accountCondition,
 			@Param("pageIndex") Integer pageIndex,@Param("pageSize") Integer pageSize);
 	
 	int addAsAccountdetail(AsAccountdetail accountDetail);

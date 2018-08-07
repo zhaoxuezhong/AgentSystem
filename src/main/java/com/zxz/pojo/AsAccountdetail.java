@@ -13,6 +13,7 @@ public class AsAccountdetail implements java.io.Serializable {
 	private static final long serialVersionUID = -4203940123620340430L;
 	private Integer id;
 	private Integer userId;
+	private String userName;
 	private Integer detailType;
 	private String detailTypeName;
 	private Double money;//账务资金
@@ -113,6 +114,14 @@ public class AsAccountdetail implements java.io.Serializable {
 
 	public void setDetailDateTime(Timestamp detailDateTime) {
 		this.detailDateTime = detailDateTime;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

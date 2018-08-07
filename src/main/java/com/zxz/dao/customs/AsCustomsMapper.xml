@@ -5,30 +5,81 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.zxz.dao.customs.AsCustomsMapper">
 
 	<select id="getAsCustomsCount" resultType="int" parameterType="AsCustoms">
-		select count(1) from as_customs 
+		select count(1) from as_customs
 		<where>
-			<if test="customName !=null">customName like concat('%',#{customName},'%')</if>
+			<if test="agentId !=null">agentId =#{agentId}</if>
+			<if test="customName !=null">and customName like concat('%',#{customName},'%')</if>
 		</where>
 	</select>
-	
-	<select id="findAsCustomsList" resultType="AsCustoms" >
+
+	<select id="findAsCustomsList" resultType="AsCustoms">
 		select *from as_customs
 		<where>
-			<if test="customs.customName !=null">customName like concat('%',#{customs.customName},'%')</if>
+			<if test="customs.agentId !=null">agentId=#{customs.agentId}</if>
+			<if test="customs.customName !=null">and customName like concat('%',#{customs.customName},'%')
+			</if>
 		</where>
 		order by regDatetime desc
 		<if test="pageIndex!=null and pageSize!=null">limit #{pageIndex},#{pageSize}</if>
 	</select>
-	
-	<insert id="addAsCustoms" parameterType="AsCustoms" keyProperty="id" useGeneratedKeys="true">
-		INSERT INTO `as_customs`(`agentId`, `agentName`, `customName`, 
-		`customType`, `customTypeName`, `siteUrl`, `customStatus`, `bossName`, 
-		`cardType`, `cardTypeName`, `cardNum`, `companyTel`, `companyFax`, `regDatetime`, 
-		`country`, `province`, `city`, `area`, `companyAddress`, `memo`, `agentCode`) 
-		VALUES (#{agentId}, #{agentName}, #{customName}, 
-		#{customType}, #{customTypeName}, #{siteUrl}, #{customStatus}, #{bossName}, 
-		#{cardType}, #{cardTypeName}, #{cardNum}, #{companyTel}, #{companyFax}, #{regDatetime}, 
-		#{country}, #{province}, #{city}, #{area}, #{companyAddress}, #{memo}, #{agentCode});
+
+	<insert id="addAsCustoms" parameterType="AsCustoms" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO `as_customs`(`agentId`, `agentName`,
+		`customName`,
+		`customType`, `customTypeName`, `siteUrl`, `customStatus`, `bossName`,
+		`cardType`, `cardTypeName`, `cardNum`, `companyTel`, `companyFax`, `regDatetime`,
+		`country`, `province`, `city`, `area`, `companyAddress`, `memo`,
+		`agentCode`)
+		VALUES (#{agentId}, #{agentName}, #{customName},
+		#{customType}, #{customTypeName}, #{siteUrl}, #{customStatus}, #{bossName},
+		#{cardType}, #{cardTypeName}, #{cardNum}, #{companyTel},
+		#{companyFax}, #{regDatetime},
+		#{country}, #{province}, #{city}, #{area}, #{companyAddress}, #{memo},
+		#{agentCode});
 	</insert>
+
+	<update id="updateAsCustoms" parameterType="AsCustoms">
+		UPDATE `as_customs`
+		<trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+			<if test="customName !=null">`customName` = #{customName},</if>
+			<if test="customType !=null">`customType` = #{customType},</if>
+			<if test="customTypeName !=null">`customTypeName` = #{customTypeName},</if>
+			<if test="siteUrl !=null">`siteUrl` = #{siteUrl},</if>
+			<if test="customStatus !=null">`customStatus` = #{customStatus},</if>
+			<if test="bossName !=null">`bossName` = #{bossName},</if>
+			<if test="cardType !=null">`cardType` = #{cardType},</if>
+			<if test="cardTypeName !=null">`cardTypeName` = #{cardTypeName},</if>
+			<if test="cardNum !=null">`cardNum` = #{cardNum},</if>
+			<if test="companyTel !=null">`companyTel` = #{companyTel},</if>
+			<if test="companyFax !=null">`companyFax` = #{companyFax},</if>
+			<if test="regDatetime !=null">`regDatetime` = #{regDatetime},</if>
+			<if test="country !=null">`country` = #{country},</if>
+			<if test="province !=null">`province` = #{province},</if>
+			<if test="city !=null">`city` = #{city},</if>
+			<if test="area !=null">`area` = #{area},</if>
+			<if test="companyAddress !=null">`companyAddress` = #{companyAddress},</if>
+			<if test="memo !=null">`memo` = #{memo},</if>
+		</trim>
+	</update>
+
+	<select id="findAsCustoms" resultMap="AsCustomsMap">
+		select
+		a.*,c.id c_id,c.customId ,c.contactEmail,c.contactFax,c.contactName,
+		c.contactRole,c.contactTel,
+		hp.province provinceName,hc.city cityName,ha.area areaName from as_customs a
+		JOIN as_contacts c ON a.id=c.customId
+		JOIN hat_province hp on hp.provinceID=a.province
+		JOIN hat_city hc on hc.cityID=a.city
+		JOIN hat_area ha on ha.areaID=a.area
+		where a.id=#{id}
+	</select>
+
+	<resultMap type="AsCustoms" id="AsCustomsMap">
+		<id property="id" column="id" />
+		<collection property="contactList" ofType="AsContacts">
+			<id property="id" column="c_id" />
+		</collection>
+	</resultMap>
 
 </mapper>

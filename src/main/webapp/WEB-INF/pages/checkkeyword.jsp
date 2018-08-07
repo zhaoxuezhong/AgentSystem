@@ -3,20 +3,19 @@
 <jsp:include page="inc/head.jsp"></jsp:include>
 <div class="mbxnav">
 	<!-- 导航 -->
-	系统管理\ <a href="/checkkeyword.action">关键词审核</a>
+	系统管理\ <a href="javascript:void(0)">关键词审核</a>
 </div>
 <div class="container">
 	<!-- 搜索 -->
 	<div class="serachuserdiv ope">
 		<ul>
 			<li>
-				<form action="/checkkeyword.action" method="post">
-					关键词:<input type="text" name="keywords.keywords"
-						value="${keywords.keywords}"> <input type="submit"
-						value="查询">
-						
-					<span class="okflow">审核流程:已申请(代理商申请)>审核中>通过>续费</span>	
-					<span  class="noflow">审核流程:已申请(代理商申请)>审核中>不通过</span>
+				<form action="agent/keyword/checkkeyword" method="post">
+				<input  type="hidden" name="pageIndex" value="1"/>
+					关键词:<input type="text" name="keywords"
+						value="${asKeywords.keywords}"> <input type="submit"
+						value="查询"> <span class="okflow">审核流程:已申请(代理商申请)>审核中>通过>续费</span>
+					<span class="noflow">审核流程:已申请(代理商申请)>审核中>不通过</span>
 				</form>
 			</li>
 		</ul>
@@ -40,91 +39,58 @@
 			</tr>
 		</thead>
 		<tbody>
-			<s:iterator value="pager.items" status="st">
+			<c:forEach items="${keywordsList.list}" var="keyword" varStatus="st">
 				<tr>
 					<td>${st.index+1}</td>
-					<td>${keywords}</td>
-					<td>${customName }</td>
-					<td>${agentName }</td>
-					<td>${serviceYears }</td>
-					<td><s:date name="regDatetime" format="yyyy-MM-dd HH:mm:ss" />
-					</td>
-					<td><s:date name="regPassDatetime" format="yyyy-MM-dd HH:mm:ss" />
-					</td>
-					<td><s:if test="isPass==0">不过期</s:if>
-						 <s:if test="isPass==1">预注册过期</s:if>
-						<s:if test="isPass==2">正式注册过期</s:if>
-					</td>
-					<td><s:if test="checkStatus==0">已申请</s:if> <s:if
-							test="checkStatus==1">审核中</s:if> 
-							<s:if test="checkStatus==2">已通过</s:if>
-						<s:if test="checkStatus==3">未通过</s:if>
-					</td>
-					<td><s:if test="isUse==1">已使用</s:if> <s:if test="isUse==0">未使用</s:if>
-					</td>
-					<td><s:if test="openApp==0">未开通</s:if> <s:if test="openApp==1">开通</s:if>
+					<td>${keyword.keywords}</td>
+					<td>${keyword.customName }</td>
+					<td>${keyword.agentName }</td>
+					<td>${keyword.serviceYears }</td>
+					<td>${keyword.regDatetime}</td>
+					<td>${keyword.regPassDatetime}</td>
+					<td>${keyword.isPass==null?'':keyword.isPass==0?'不过期':keyword.isPass==1?'预注册过期':'正式注册过期'}
 					</td>
 					<td>
-						<select class="checkselect" kid="${id}" keyword="${keywords}">
-							
-								<option value="">--请选择--</option>
-								<!-- 如果已申请 -->
-								<s:if test="checkStatus==0 && isUse==1" >
-									<option value="1">审核中</option>
-								</s:if>
-								<s:elseif test="checkStatus==1&& isUse==1">
-									<option value="2">审核通过</option>
-									<option value="3">审核不通过</option>									
-								</s:elseif>
-								<s:elseif test="checkStatus==2&& isUse==1">
-									<option value="4">续费</option>
-								</s:elseif>
-								
-								<s:if test="isUse==1">
-									<option value="5">不使用</option>
-								</s:if>
-								<s:else>
-									<option value="6">使用</option>
-								</s:else>
-						</select>
-
+						${keyword.checkStatus==0?'已申请':keyword.checkStatus==1?'审核中':keyword.checkStatus==2?'已通过':'未通过'}
 					</td>
+					<td>${keyword.isUse==1?'已使用':'未使用'}</td>
+					<td>${keyword.openApp==0?'<font color="red">未开通</font>':'开通'}
+					</td>
+					<td><select class="checkselect" kid="${keyword.id}"
+						keyword="${keyword.keywords}">
+							<option value="">--请选择--</option>
+							<!-- 如果已申请 -->
+							<c:choose>
+								<c:when test="${keyword.checkStatus==0 and keyword.isUse==1 }">
+									<option value="1">审核中</option>
+								</c:when>
+								<c:when test="${keyword.checkStatus==1 and keyword.isUse==1 }">
+									<option value="2" data-year="${keyword.serviceYears}">审核通过</option>
+									<option value="3">审核不通过</option>
+								</c:when>
+								<c:when test="${keyword.checkStatus==2 and keyword.isUse==1 }">
+									<option value="4">续费</option>
+								</c:when>
+							</c:choose>
+
+							<c:choose>
+								<c:when test="${keyword.isUse==1 }">
+									<option value="5">不使用</option>
+								</c:when>
+								<c:otherwise>
+									<option value="6">使用</option>
+								</c:otherwise>
+							</c:choose>
+					</select></td>
 				</tr>
-			</s:iterator>
+			</c:forEach>
 		</tbody>
 	</table>
-	<div class="pagination pagination-centered">
-		<ul>
-			<li><a
-				href="/checkkeyword.action?pager.page=1&keywords.keywords=<s:property value="keywords.keywords" />">首页</a>
-			</li>
-			<s:if test="pager.prevPages!=null">
-				<s:iterator value="pager.prevPages" var="num">
-					<li><a
-						href="/checkkeyword.action?pager.page=<s:property value="#num"/>&keywords.keywords=<s:property value="keywords.keywords" />"><s:property
-								value="#num" /> </a></li>
-				</s:iterator>
-			</s:if>
-			<li class="active"><a href="#"><s:property
-						value="pager.page" /> </a>
-			</li>
-			<s:if test="pager.nextPages!=null">
-				<s:iterator value="pager.nextPages" var="num">
-					<li><a
-						href="/checkkeyword.action?pager.page=<s:property value="#num"/>&keywords.keywords=<s:property value="keywords.keywords" />"><s:property
-								value="#num" /> </a></li>
-
-				</s:iterator>
-			</s:if>
-			<li><a
-				href="/checkkeyword.action?pager.page=<s:property value="pager.pageCount"/>&keywords.keywords=<s:property value="keywords.keywords" />">尾页</a>
-			</li>
-		</ul>
-	</div>
-
+	<c:set value="${keywordsList}" var="pager"></c:set>
+	<%@ include file="inc/pagination.jsp"%>
 </div>
 <jsp:include page="inc/foot.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/checkkeyword.css">
-<script type="text/javascript" src="/js/checkkeyword.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/statics/css/checkkeyword.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/checkkeyword.js"></script>
 </body>
 </html>

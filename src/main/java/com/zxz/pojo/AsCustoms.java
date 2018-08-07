@@ -36,6 +36,9 @@ public class AsCustoms implements java.io.Serializable {
 	private String agentCode;
 
 	private List<AsContacts> contactList;
+	private String provinceName;
+	private String cityName;
+	private String areaName;
 	// Constructors
 
 	/** default constructor */
@@ -47,9 +50,21 @@ public class AsCustoms implements java.io.Serializable {
 		this.agentId = agentId;
 	}
 
+	public AsCustoms(Integer agentId, String customName) {
+		super();
+		this.agentId = agentId;
+		this.customName = customName;
+	}
+
 	public AsCustoms(String customName) {
 		super();
 		this.customName = customName;
+	}
+
+	public AsCustoms(Integer id, Integer customStatus) {
+		super();
+		this.id = id;
+		this.customStatus = customStatus;
 	}
 
 	/** full constructor */
@@ -264,6 +279,30 @@ public class AsCustoms implements java.io.Serializable {
 
 	public void setContactList(List<AsContacts> contactList) {
 		this.contactList = contactList;
+	}
+
+	public String getProvinceName() {
+		return provinceName;
+	}
+
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 
 }

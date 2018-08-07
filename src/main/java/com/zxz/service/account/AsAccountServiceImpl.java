@@ -1,6 +1,7 @@
 package com.zxz.service.account;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -10,6 +11,7 @@ import com.zxz.dao.account.AsAccountMapper;
 import com.zxz.dao.accountdetail.AsAccountdetailMapper;
 import com.zxz.pojo.AsAccount;
 import com.zxz.pojo.AsAccountdetail;
+import com.zxz.pojo.condition.AccountCondition;
 import com.zxz.utils.PageInfo;
 
 /**
@@ -25,7 +27,8 @@ public class AsAccountServiceImpl implements AsAccountService {
 	
 	@Override
 	public AsAccount findAsAccountByUserId(Integer userId) {
-		return asAccountMapper.findAsAccountByUserId(userId);
+		List<AsAccount> list= asAccountMapper.findAsAccountByUserId(userId);
+		return list!=null&&list.size()>0?list.get(0):null;
 	}
 
 	@Override
@@ -34,7 +37,7 @@ public class AsAccountServiceImpl implements AsAccountService {
 		accountDetail.setDetailDateTime(new Timestamp(System.currentTimeMillis()));
 		accountDetail.setUserId(account.getUserId());
 		accountDetail.setMoney(account.getMoney());
-		AsAccount reAccount=asAccountMapper.findAsAccountByUserId(account.getUserId());
+		AsAccount reAccount=findAsAccountByUserId(account.getUserId());
 		//余额
 		Double money=reAccount.getMoney()+account.getMoney();
 		accountDetail.setAccountMoney(money);
@@ -45,14 +48,14 @@ public class AsAccountServiceImpl implements AsAccountService {
 	}
 
 	@Override
-	public PageInfo<AsAccountdetail> findAsAccountdetailList(Integer userId,Integer pageIndex,Integer pageSize) {
+	public PageInfo<AsAccountdetail> findAsAccountdetailList(AccountCondition accountCondition,Integer pageIndex,Integer pageSize) {
 		PageInfo<AsAccountdetail> pageInfo=new PageInfo<AsAccountdetail>();
-		Integer totalCount=asAccountdetailMapper.getAsAccountdetailCount(userId);
+		Integer totalCount=asAccountdetailMapper.getAsAccountdetailCount(accountCondition);
 		if(totalCount!=null&&totalCount!=0){
 			pageInfo.setTotalCount(totalCount);
 			pageInfo.setPageSize(pageSize);
 			pageInfo.setPageIndex(pageIndex);
-			pageInfo.setList(asAccountdetailMapper.findAsAccountdetailList(userId, 
+			pageInfo.setList(asAccountdetailMapper.findAsAccountdetailList(accountCondition, 
 					(pageInfo.getPageIndex()-1)*pageInfo.getPageSize(), pageInfo.getPageSize()));
 		}
 		return pageInfo;
@@ -61,6 +64,11 @@ public class AsAccountServiceImpl implements AsAccountService {
 	@Override
 	public boolean addAsAccount(AsAccount account) {
 		return asAccountMapper.addAsAccount(account)>0;
+	}
+
+	@Override
+	public List<AsAccount> findAllAsAccount() {
+		return asAccountMapper.findAsAccountByUserId(null);
 	}
 
 }

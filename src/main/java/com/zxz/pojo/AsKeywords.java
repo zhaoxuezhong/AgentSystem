@@ -20,6 +20,7 @@ public class AsKeywords implements java.io.Serializable {
 	private Double preRegFrozenMoney;
 	private Double price;
 	private Integer productType;
+	private String serviceName;
 	private Integer serviceYears;
 	private Integer openApp;
 	private String appUserName;
@@ -42,6 +43,22 @@ public class AsKeywords implements java.io.Serializable {
 	/** default constructor */
 	public AsKeywords() {
 	}
+
+
+	public AsKeywords(Timestamp regDatetime, Timestamp regPassDatetime) {
+		super();
+		this.regDatetime = regDatetime;
+		this.regPassDatetime = regPassDatetime;
+	}
+
+
+	public AsKeywords(String keywords, Integer isUse) {
+		super();
+		this.keywords = keywords;
+		this.isUse = isUse;
+	}
+
+
 
 	/** minimal constructor */
 	public AsKeywords(String keywords, Integer agentId, String agentName, Integer customId, String customName,
@@ -287,6 +304,14 @@ public class AsKeywords implements java.io.Serializable {
 
 	public void setIsUse(Integer isUse) {
 		this.isUse = isUse;
+	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
 }

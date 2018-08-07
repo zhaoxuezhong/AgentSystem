@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxz.dao.log.AsLogsMapper">
+
+	<select id="getAsLogsCount" resultType="int" parameterType="AsLogs">
+		select count(1) from as_logs 
+		<where>
+			<if test="userId !=null">userId =#{userId}</if>
+			<if test="operateDatetime !=null">and operateDatetime =#{operateDatetime}</if>
+		</where>
+	</select>
+	
+	<select id="findAsLogsList" resultType="AsLogs">
+		select * from as_logs
+		<where>
+			<if test="asLogs.userId !=null">userId =#{asLogs.userId}</if>
+			<if test="asLogs.operateDatetime !=null">and operateDatetime =#{asLogs.operateDatetime}</if>
+		</where>
+		order by operateDatetime desc
+		<if test="pageIndex!=null and pageSize!=null">limit #{pageIndex},#{pageSize}</if>
+	</select>
+	
+</mapper>

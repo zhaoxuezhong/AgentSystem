@@ -23,6 +23,12 @@ public class AsLogs implements java.io.Serializable {
 	public AsLogs() {
 	}
 
+	public AsLogs(Integer userId, String userName) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+	}
+
 	/** full constructor */
 	public AsLogs(Integer userId, String userName, String operateInfo, Timestamp operateDatetime) {
 		this.userId = userId;

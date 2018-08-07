@@ -21,7 +21,7 @@
 						对不起,您没有开户
 					</c:when>
 					<c:otherwise>
-						${account.money}
+						<fmt:formatNumber value="${account.money}" pattern="#,#00.0#"/>
 					</c:otherwise>
 				</c:choose>
 				<a href="${pageContext.request.contextPath}/agent/account/accountdetail">查看账户明细</a>

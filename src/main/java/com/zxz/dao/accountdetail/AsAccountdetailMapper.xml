@@ -4,12 +4,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zxz.dao.accountdetail.AsAccountdetailMapper">
 
-	<select id="getAsAccountdetailCount" resultType="int" parameterType="int">
-		select count(1) from as_accountdetail where userId=#{userId}
+	<select id="getAsAccountdetailCount" resultType="int" parameterType="AccountCondition">
+		select count(1) from as_accountdetail
+		<where>
+			<if test="id !=null">userId=#{id}</if>
+			<if test="detailType !=null">and detailType = #{detailType}</if>
+			<if test="startTime !=null">and detailDateTime &gt; #{startTime}</if>
+			<if test="endTime !=null">and detailDateTime &lt; #{endTime}</if>
+		</where>
 	</select>
 
 	<select id="findAsAccountdetailList" resultType="AsAccountdetail">
-		select *from as_accountdetail where userId=#{userId} limit #{pageIndex},#{pageSize}
+		select aa.*,au.userName userName from as_accountdetail aa join as_user au on aa.userId=au.id
+		<where>
+			<if test="accountCondition.id !=null">userId=#{accountCondition.id}</if>
+			<if test="accountCondition.detailType !=null">and detailType = #{accountCondition.detailType}</if>
+			<if test="accountCondition.startTime !=null">and detailDateTime &gt; #{accountCondition.startTime}</if>
+			<if test="accountCondition.endTime !=null">and detailDateTime &lt; #{accountCondition.endTime}</if>
+		</where>
+		 limit #{pageIndex},#{pageSize}
 	</select>
 	
 	<insert id="addAsAccountdetail" parameterType="AsAccountdetail">

@@ -11,7 +11,7 @@
 			<label>客户名称:</label>
 			<input type="text" id="cname" name="customName" value="${asCustoms.customName}">
 			<input type="submit" value="查询"/>
-			
+			<input  type="hidden" name="pageIndex" value="1"/>
 		</div>
 	</form>
 
@@ -52,30 +52,6 @@
 					</td>
 				</tr>
 		</c:forEach>
-			<%-- <s:iterator value="pager.items" status="st">
-				<tr>
-					<td>${st.index+1}</td>
-					<td>${customName}</td>
-					<td>${bossName}</td>
-					<td><s:date name="regDatetime" format="yyyy-MM-dd HH:mm:ss"/></td>
-					<td>${customTypeName}</td>
-					<td>${customStatus==1?'启用':'停用'}</td>					
-					<td class="funcli">
-						<ul>
-							<li><a class="viewCustom" id="${id}">查看 </a> </li>
-							<li><a class="modifyCustom" id="${id}"> 修改</a></li>
-							<li><a class="mofifyCustomStatus" id="${id}" customName="${customName}" mStatus="${customStatus}">
-							<s:if test="customStatus==1">
-								<font color="red">停用</font></s:if>
-							<s:else>
-								<font color="green">启用</font>
-							</s:else>
-							</a> </li>
-						</ul>
-					
-					</td>
-				</tr>
-			</s:iterator> --%>
 		</tbody>
 	</table>
 	<c:set var="pager" value="${customsList}"></c:set>
